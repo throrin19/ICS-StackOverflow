@@ -17,12 +17,13 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_weight="1"
+        android:padding="20dp"
         android:gravity="center"
         android:orientation="vertical" >
 
         <EditText
             android:id="@+id/editText1"
-            android:layout_width="300dp"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:hint="Login"
             android:ems="10" >
@@ -32,7 +33,7 @@
 
         <EditText
             android:id="@+id/editText2"
-            android:layout_width="300dp"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:hint="Password"
             android:ems="10"
@@ -41,7 +42,7 @@
         <Button
             android:id="@+id/button1"
             android:layout_marginTop="30dp"
-            android:layout_width="300dp"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="Connection"
             android:drawableRight="@android:drawable/ic_menu_send" />

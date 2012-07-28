@@ -11,7 +11,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:name=".Application"
-        android:theme="@style/Theme.stackoverflow" >
+        android:theme="@style/AppTheme" >
         <activity
             android:name=".modules.login.LoginActivity"
             android:configChanges="keyboardHidden"

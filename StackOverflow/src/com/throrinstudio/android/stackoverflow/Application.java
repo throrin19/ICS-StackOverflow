@@ -15,6 +15,7 @@ public class Application  extends android.app.Application{
      */
     private static final boolean LOG = true;
     
+    
     @Override
     public void onCreate() {
         super.onCreate();
@@ -63,6 +64,16 @@ public class Application  extends android.app.Application{
     public static int getRessourceByName(String name) {
         return CONTEXT.getResources().getIdentifier(name, "drawable",
                 Application.getApplicationPackageName());
+    }
+    
+    /**
+     * Get String from a given resource id
+     *
+     * @param resId resource id
+     * @return String
+     */
+    public static String getAppString(int resId) {
+        return CONTEXT.getString(resId);
     }
 
 }

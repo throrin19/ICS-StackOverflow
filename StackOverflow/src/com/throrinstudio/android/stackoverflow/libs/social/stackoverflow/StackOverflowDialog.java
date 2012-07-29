@@ -23,6 +23,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.throrinstudio.android.stackoverflow.R;
+import com.throrinstudio.android.stackoverflow.utils.MeasuresUtils;
 
 public class StackOverflowDialog extends DialogFragment{
 	
@@ -80,8 +81,21 @@ public class StackOverflowDialog extends DialogFragment{
         final float scale 	= getContext().getResources().getDisplayMetrics().density;
         float[] dimensions 	= (display.getWidth() < display.getHeight()) ? DIMENSIONS_PORTRAIT : DIMENSIONS_LANDSCAPE;
         
-        d.addContentView(mContent, new FrameLayout.LayoutParams(display.getWidth(),
-				display.getHeight()));
+        d.setCanceledOnTouchOutside(false);
+        
+        if(display.getWidth() > MeasuresUtils.DpToPx(600)){
+        	if(display.getWidth() < display.getHeight()){
+        		d.addContentView(mContent, new FrameLayout.LayoutParams(display.getWidth(),
+        				display.getHeight()/2));
+        	}else{
+        		d.addContentView(mContent, new FrameLayout.LayoutParams(display.getWidth()/2,
+        				display.getHeight()));
+        	}
+        }else{
+        	d.addContentView(mContent, new FrameLayout.LayoutParams(display.getWidth(),
+    				display.getHeight()));
+        }
+        
         
         return d;
     }

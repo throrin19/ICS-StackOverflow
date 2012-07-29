@@ -22,4 +22,9 @@ public class StackoverflowApiUtils extends AbstractApiUtils{
 		return "DQzxOulxcHp2yS78IlmzIw((";
 	}
 
+	@Override
+	public String getOauthUrl() {
+		return "https://stackexchange.com/oauth/dialog";
+	}
+
 }

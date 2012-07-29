@@ -3,8 +3,7 @@ package com.throrinstudio.android.stackoverflow.providers;
 
 public class BasicProvider
 {
-	private static BasicProvider	instance	= null;
-	private long					mEventId;
+	protected static BasicProvider	instance	= null;
 
 	// SINGLETON//////////////////////////////////////////////////////////////
 	public static BasicProvider getInstance()
@@ -34,11 +33,6 @@ public class BasicProvider
 			return true;
 		}
 		return false;
-	}
-
-	public long getCurrentId()
-	{
-		return mEventId;
 	}
 	
 	public void initData(){

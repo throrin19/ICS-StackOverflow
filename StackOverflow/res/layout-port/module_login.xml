@@ -29,7 +29,7 @@
             android:text="@string/login_create_account" />
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/login"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:drawableRight="@drawable/ic_send"

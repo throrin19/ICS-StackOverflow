@@ -6,6 +6,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 
 import com.throrinstudio.android.stackoverflow.R;
+import com.throrinstudio.android.stackoverflow.libs.social.stackoverflow.StackOverflowApp;
 import com.throrinstudio.android.stackoverflow.libs.social.stackoverflow.StackOverflowDialog;
 import com.throrinstudio.android.stackoverflow.libs.social.stackoverflow.StackOverflowDialog.SoDialogListener;
 import com.throrinstudio.android.stackoverflow.modules.basic.AbstractBasicFragment;
@@ -42,22 +43,8 @@ public class LoginFragment extends AbstractBasicFragment{
 			
 			@Override
 			public void onClick(View v) {
-				StackOverflowDialog d = StackOverflowDialog.newInstance(getActivity(), ((LoginProvider)mModel.getProvider()).getOauthUrl(), new SoDialogListener() {
-					
-					@Override
-					public void onError(String value) {
-						// TODO Auto-generated method stub
-						
-					}
-					
-					@Override
-					public void onComplete(String value) {
-						// TODO Auto-generated method stub
-						
-					}
-				});
-				
-				d.show(getFragmentManager(), "SoDialog");
+				StackOverflowApp stackApp = new StackOverflowApp(getActivity(), ((LoginProvider)mModel.getProvider()).getOauthUrl(), ((LoginProvider)mModel.getProvider()).getClientId());
+				stackApp.authorize();
 			}
 		});
 	}

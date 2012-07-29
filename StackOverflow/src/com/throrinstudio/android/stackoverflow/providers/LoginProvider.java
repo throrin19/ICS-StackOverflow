@@ -20,4 +20,8 @@ public class LoginProvider extends BasicProvider{
 	public String getClientId(){
 		return new StackoverflowApiUtils().getAppId();
 	}
+	
+	public String getRedirectUri(){
+		return "https://stackexchange.com/oauth/login_success";
+	}
 }

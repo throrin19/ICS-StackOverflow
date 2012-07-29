@@ -44,6 +44,8 @@ public class LoginFragment extends AbstractBasicFragment{
 			@Override
 			public void onClick(View v) {
 				StackOverflowApp stackApp = new StackOverflowApp(getActivity(), ((LoginProvider)mModel.getProvider()).getOauthUrl(), ((LoginProvider)mModel.getProvider()).getClientId());
+				stackApp.setRedirectUrl(((LoginProvider)mModel.getProvider()).getRedirectUri());
+				stackApp.setScopes(StackOverflowApp.SCOPE_NO_EXPIRY+","+StackOverflowApp.SCOPE_WRITE_ACCESS);
 				stackApp.authorize();
 			}
 		});

@@ -3,6 +3,7 @@ package com.throrinstudio.android.stackoverflow.libs.social.stackoverflow;
 import java.io.IOException;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.net.Uri;
 import android.net.Uri.Builder;
 import android.os.Handler;
@@ -54,6 +55,7 @@ public class StackOverflowApp {
 			if(mRedirect != null && mRedirect.length() > 0){
 				b.appendQueryParameter(PARAM_REDIRECT, mRedirect);
 			}
+			b.appendQueryParameter("response_type", "token");
 			
 			/*new Thread() {
 				@Override
@@ -65,6 +67,9 @@ public class StackOverflowApp {
 				}
 			}.start();*/
 			
+			
+			//Intent i = new Intent(Intent.ACTION_VIEW, b.build());
+			//mActivity.startActivity(i);
 			StackOverflowDialog.newInstance(mActivity, b.toString(), null).show(mActivity.getFragmentManager(), "StackDialog");
 			
 			

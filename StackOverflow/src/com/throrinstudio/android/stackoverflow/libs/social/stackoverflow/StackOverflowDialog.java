@@ -1,6 +1,7 @@
 package com.throrinstudio.android.stackoverflow.libs.social.stackoverflow;
 
 import android.annotation.SuppressLint;
+import android.app.ActionBar.LayoutParams;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.ProgressDialog;
@@ -14,6 +15,7 @@ import android.util.Log;
 import android.view.Display;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
@@ -66,6 +68,7 @@ public class StackOverflowDialog extends DialogFragment{
         
         mSpinner.requestWindowFeature(Window.FEATURE_NO_TITLE);
         mSpinner.setMessage(getContext().getString(R.string.global_loading)+"...");
+        mSpinner.setCanceledOnTouchOutside(false);
 
         mContent = new LinearLayout(getContext());
         mContent.setOrientation(LinearLayout.VERTICAL);
@@ -77,8 +80,8 @@ public class StackOverflowDialog extends DialogFragment{
         final float scale 	= getContext().getResources().getDisplayMetrics().density;
         float[] dimensions 	= (display.getWidth() < display.getHeight()) ? DIMENSIONS_PORTRAIT : DIMENSIONS_LANDSCAPE;
         
-        d.addContentView(mContent, new FrameLayout.LayoutParams((int) (dimensions[0] * scale + 0.5f),
-                (int) (dimensions[1] * scale + 0.5f)));
+        d.addContentView(mContent, new FrameLayout.LayoutParams(display.getWidth(),
+				display.getHeight()));
         
         return d;
     }
@@ -87,7 +90,7 @@ public class StackOverflowDialog extends DialogFragment{
     private void setUpTitle(Dialog d) {
         d.requestWindowFeature(Window.FEATURE_NO_TITLE);
         
-        Drawable icon = getContext().getResources().getDrawable(R.drawable.ic_launcher);
+        Drawable icon = getContext().getResources().getDrawable(R.drawable.ic_dialog_web);
         
         mTitle = new TextView(getContext());
         
@@ -106,10 +109,23 @@ public class StackOverflowDialog extends DialogFragment{
 	private void setUpWebView() {
         mWebView = new WebView(getContext());
         
+        mWebView.clearHistory();
+		mWebView.clearFormData();
+		mWebView.clearCache(true);
+		
         mWebView.setVerticalScrollBarEnabled(false);
         mWebView.setHorizontalScrollBarEnabled(false);
         mWebView.setWebViewClient(new StackWebViewClient());
-        mWebView.getSettings().setJavaScriptEnabled(true);
+        
+        WebSettings settings = mWebView.getSettings();
+		settings.setSavePassword			(true);
+		settings.setSaveFormData			(true);
+		settings.setJavaScriptEnabled		(true);
+		settings.setSupportZoom				(false);
+		settings.setCacheMode				(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+		settings.setDomStorageEnabled		(true);
+		settings.setSupportMultipleWindows	(false);
+        
         mWebView.loadUrl(mUrl);
         mWebView.setLayoutParams(FILL);
         

@@ -26,5 +26,4 @@ public class StackoverflowApiUtils extends AbstractApiUtils{
 	public String getOauthUrl() {
 		return "https://stackexchange.com/oauth/dialog";
 	}
-
 }

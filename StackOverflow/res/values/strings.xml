@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">StackOverflow</string>
+    
+    <!-- Login -->
+    <string name="login_create_account">Create an account</string>
+    <string name="login_connect">Login</string>
 </resources>

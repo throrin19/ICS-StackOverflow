@@ -20,32 +20,20 @@
         android:padding="20dp"
         android:gravity="center_horizontal"
         android:orientation="vertical" >
-
-        <EditText
-            android:id="@+id/editText1"
+
+        <Button
+            android:id="@+id/register"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:hint="Login"
-            android:ems="10" >
-
-            <requestFocus />
-        </EditText>
-
-        <EditText
-            android:id="@+id/editText2"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:hint="Password"
-            android:ems="10"
-            android:inputType="textPassword" />
-
+            android:drawableRight="@drawable/ic_user_add"
+            android:text="@string/login_create_account" />
+
         <Button
             android:id="@+id/button1"
-            android:layout_marginTop="30dp"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Connection"
-            android:drawableRight="@android:drawable/ic_menu_send" />
+            android:drawableRight="@drawable/ic_send"
+            android:text="@string/login_connect" />
         
     </LinearLayout>
     

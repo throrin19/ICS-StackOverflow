@@ -24,7 +24,7 @@ import android.widget.TextView;
 import com.throrinstudio.android.common.utils.MeasuresUtils;
 import com.throrinstudio.android.stackexchange.R;
 
-public class StackOverflowDialog extends DialogFragment{
+public class StackExchangeDialog extends DialogFragment{
 	
 
     static final FrameLayout.LayoutParams FILL = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,
@@ -48,7 +48,7 @@ public class StackOverflowDialog extends DialogFragment{
     private static final String TAG = "StackOverflow-WebView";
 	
 
-    private StackOverflowDialog(Context context, String url, SoDialogListener listener) {
+    private StackExchangeDialog(Context context, String url, SoDialogListener listener) {
         super();
         
         mUrl 		= url;
@@ -61,8 +61,8 @@ public class StackOverflowDialog extends DialogFragment{
     	return mContext;
     }
     
-    public static StackOverflowDialog newInstance(Context c, String url, SoDialogListener l){
-    	return new StackOverflowDialog(c, url, l);
+    public static StackExchangeDialog newInstance(Context c, String url, SoDialogListener l){
+    	return new StackExchangeDialog(c, url, l);
     }
     
     @Override
@@ -163,7 +163,7 @@ public class StackOverflowDialog extends DialogFragment{
         		Log.d(TAG, "CallBack");
         		//mListener.onComplete(url);
         		
-        		StackOverflowDialog.this.dismiss();
+        		StackExchangeDialog.this.dismiss();
         		
         		return true;
         	}
@@ -179,7 +179,7 @@ public class StackOverflowDialog extends DialogFragment{
       
             mListener.onError(description);
             
-            StackOverflowDialog.this.dismiss();
+            StackExchangeDialog.this.dismiss();
         }
 
         @Override

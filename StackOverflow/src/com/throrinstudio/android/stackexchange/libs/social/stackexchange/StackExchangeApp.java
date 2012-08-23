@@ -9,7 +9,7 @@ import android.net.Uri.Builder;
 import android.os.Handler;
 import android.os.Message;
 
-public class StackOverflowApp {
+public class StackExchangeApp {
 
 	private Activity mActivity;
 	private String mClientId;
@@ -27,7 +27,7 @@ public class StackOverflowApp {
 	private static final String PARAM_REDIRECT 		= "redirect_uri";
 	private static final String PARAM_STATE 		= "state";
 	
-	public StackOverflowApp(Activity a, String signUrl, String clientId){
+	public StackExchangeApp(Activity a, String signUrl, String clientId){
 		mActivity 		= a;
 		mClientId 		= clientId;
 		mUrl			= signUrl;
@@ -70,7 +70,7 @@ public class StackOverflowApp {
 			
 			//Intent i = new Intent(Intent.ACTION_VIEW, b.build());
 			//mActivity.startActivity(i);
-			StackOverflowDialog.newInstance(mActivity, b.toString(), null).show(mActivity.getFragmentManager(), "StackDialog");
+			StackExchangeDialog.newInstance(mActivity, b.toString(), null).show(mActivity.getFragmentManager(), "StackDialog");
 			
 			
 		} catch (IOException e) {

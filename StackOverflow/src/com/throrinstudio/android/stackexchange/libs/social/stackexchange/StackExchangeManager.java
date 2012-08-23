@@ -2,8 +2,8 @@ package com.throrinstudio.android.stackexchange.libs.social.stackexchange;
 
 import android.app.Activity;
 
-public interface StackOverflowManager {
+public interface StackExchangeManager {
 
-	public void connect(final StackOverflowApp mStack, final Activity a);
+	public void connect(final StackExchangeApp mStack, final Activity a);
 	
 }

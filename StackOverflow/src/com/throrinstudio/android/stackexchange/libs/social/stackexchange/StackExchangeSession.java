@@ -6,7 +6,7 @@ import android.content.SharedPreferences.Editor;
 
 import com.throrinstudio.android.stackexchange.Application;
 
-public class StackOverflowSession {
+public class StackExchangeSession {
 
 	private SharedPreferences sharedPref;
 	private Editor editor;
@@ -15,7 +15,7 @@ public class StackOverflowSession {
 	private static final String STACK_AUTH_SECRET_KEY = "stack_auth_secret_key";
 	private static final String STACK_USER_NAME = "stack_user_name";
 	
-	public StackOverflowSession(Context context) {
+	public StackExchangeSession(Context context) {
 		sharedPref 	  = Application.getPreferences();
 		editor 		  = sharedPref.edit();
 	}

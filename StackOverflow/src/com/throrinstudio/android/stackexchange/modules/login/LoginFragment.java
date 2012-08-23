@@ -6,7 +6,7 @@ import android.widget.Button;
 
 import com.throrinstudio.android.common.modules.basic.AbstractBasicModel;
 import com.throrinstudio.android.stackexchange.R;
-import com.throrinstudio.android.stackexchange.libs.social.stackexchange.StackOverflowApp;
+import com.throrinstudio.android.stackexchange.libs.social.stackexchange.StackExchangeApp;
 import com.throrinstudio.android.stackexchange.modules.basic.AbstractStackBasicFragment;
 import com.throrinstudio.android.stackexchange.providers.LoginProvider;
 
@@ -30,9 +30,9 @@ public class LoginFragment extends AbstractStackBasicFragment{
 			
 			@Override
 			public void onClick(View v) {
-				StackOverflowApp stackApp = new StackOverflowApp(getActivity(), ((LoginProvider)mModel.getProvider()).getOauthUrl(), ((LoginProvider)mModel.getProvider()).getClientId());
+				StackExchangeApp stackApp = new StackExchangeApp(getActivity(), ((LoginProvider)mModel.getProvider()).getOauthUrl(), ((LoginProvider)mModel.getProvider()).getClientId());
 				stackApp.setRedirectUrl(((LoginProvider)mModel.getProvider()).getRedirectUri());
-				stackApp.setScopes(StackOverflowApp.SCOPE_NO_EXPIRY+","+StackOverflowApp.SCOPE_WRITE_ACCESS);
+				stackApp.setScopes(StackExchangeApp.SCOPE_NO_EXPIRY+","+StackExchangeApp.SCOPE_WRITE_ACCESS);
 				stackApp.authorize();
 			}
 		});

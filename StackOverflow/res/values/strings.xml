@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">StackOverflow</string>
+    <string name="app_name">StackExchange</string>
     
     <!-- Global -->
     <string name="global_search">Search</string>

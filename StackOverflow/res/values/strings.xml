@@ -43,6 +43,6 @@
     <string name='global_location'>Location</string>
     
     <!-- Login -->
-    <string name="login_create_account">Create an account</string>
+    <string name="login_add_account">Add an account</string>
     <string name="login_connect">Login</string>
 </resources>

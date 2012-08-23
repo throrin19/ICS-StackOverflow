@@ -45,4 +45,6 @@
     <!-- Login -->
     <string name="login_add_account">Add an account</string>
     <string name="login_connect">Login</string>
+    <string name="login_account_empty">No accounts</string>
+    <string name="login_account_empty_summary">You do not currently attached an account.\nPlease click on this button to add one.</string>
 </resources>

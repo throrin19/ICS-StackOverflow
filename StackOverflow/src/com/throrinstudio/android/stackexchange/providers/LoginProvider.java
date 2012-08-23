@@ -3,7 +3,7 @@ package com.throrinstudio.android.stackexchange.providers;
 import android.net.Uri;
 
 import com.throrinstudio.android.common.providers.BasicProvider;
-import com.throrinstudio.android.stackexchange.utils.StackoverflowApiUtils;
+import com.throrinstudio.android.stackexchange.libs.social.stackexchange.utils.StackExchangeApiUtils;
 
 public class LoginProvider extends BasicProvider{
 
@@ -14,14 +14,14 @@ public class LoginProvider extends BasicProvider{
 	
 	
 	public String getOauthUrl(){
-		return new StackoverflowApiUtils().getOauthUrl();
+		return StackExchangeApiUtils.getOauthUrl();
 	}
 	
 	public String getClientId(){
-		return new StackoverflowApiUtils().getAppId();
+		return StackExchangeApiUtils.getAppId();
 	}
 	
 	public String getRedirectUri(){
-		return "https://stackexchange.com/oauth/login_success";
+		return StackExchangeApiUtils.getRedirectUrl();
 	}
 }

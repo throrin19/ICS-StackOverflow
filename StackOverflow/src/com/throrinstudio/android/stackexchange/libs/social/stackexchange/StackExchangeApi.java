@@ -2,8 +2,10 @@ package com.throrinstudio.android.stackexchange.libs.social.stackexchange;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 
+import com.throrinstudio.android.stackexchange.libs.social.stackexchange.requesters.StackExchangeRequester;
 
 /**
  * A sample implementation of asynchronous API requests. This class provides
@@ -24,10 +26,32 @@ import java.net.MalformedURLException;
  *
  * @author  throrin19 (contact@throrinstudio.com)
  */
-public class AsyncStackExchangeRunner {
-
+public class StackExchangeApi {
 	
+	private static final String API_URL = "https://api.stackexchange.com";
 	
+	public void getSitesList(RequestListener listener){
+		
+		new Thread(){
+			@Override
+			public void run() {
+				super.run();
+				
+				StackExchangeRequester requester = new StackExchangeRequester();
+				final InputStream stream = requester.request(API_URL+"/sites");
+				
+				new Runnable() {
+					@Override
+					public void run() {
+						
+						
+					}
+				}.run();
+				
+			}		
+		}.start();
+		
+	}
 	
 	
 	/**
@@ -41,23 +65,17 @@ public class AsyncStackExchangeRunner {
 
         /**
          * Called when a request completes with the given response.
-         *
-         * Executed by a background thread: do not update the UI in this method.
          */
         public void onComplete(String response, Object state);
 
         /**
          * Called when a request has a network or request error.
-         *
-         * Executed by a background thread: do not update the UI in this method.
          */
         public void onIOException(IOException e, Object state);
 
         /**
          * Called when a request fails because the requested resource is
          * invalid or does not exist.
-         *
-         * Executed by a background thread: do not update the UI in this method.
          */
         public void onFileNotFoundException(FileNotFoundException e,
                                             Object state);
@@ -65,16 +83,12 @@ public class AsyncStackExchangeRunner {
         /**
          * Called if an invalid graph path is provided (which may result in a
          * malformed URL).
-         *
-         * Executed by a background thread: do not update the UI in this method.
          */
         public void onMalformedURLException(MalformedURLException e,
                                             Object state);
 
         /**
-         * Called when the server-side method fails.
-         *
-         * Executed by a background thread: do not update the UI in this method.
+         * Called when the server-side Facebook method fails.
          */
         public void onError(StackExchangeError e, Object state);
 

@@ -57,19 +57,6 @@ public class StackExchangeApp {
 			}
 			b.appendQueryParameter("response_type", "token");
 			
-			/*new Thread() {
-				@Override
-				public void run() {
-					String url = b.toString();
-					
-					
-					
-				}
-			}.start();*/
-			
-			
-			//Intent i = new Intent(Intent.ACTION_VIEW, b.build());
-			//mActivity.startActivity(i);
 			StackExchangeDialog.newInstance(mActivity, b.toString(), null).show(mActivity.getFragmentManager(), "StackDialog");
 			
 			

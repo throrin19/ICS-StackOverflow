@@ -17,7 +17,6 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_weight="0.5"
-        android:padding="20dp"
         android:gravity="center_horizontal"
         android:orientation="vertical" >
 
@@ -26,6 +25,7 @@
             android:id="@+id/register"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="20dp"
             android:drawableRight="@drawable/ic_user_add"
             android:text="@string/login_add_account" />
         
@@ -33,21 +33,19 @@
 		   	android:layout_width="fill_parent"
 		   	android:layout_height="fill_parent"
 		   	android:gravity="center|top"
-		   	android:orientation="vertical"
-		   	android:padding="10dp" >
+		   	android:orientation="vertical" >
 		
 		   	<ListView
 			    android:id="@+id/accounts_list"
 			    android:layout_width="match_parent"
 			    android:layout_height="wrap_content"
-			    android:layout_marginTop="40dp"
-				android:layout_marginBottom="50dp"
 			    android:visibility="gone" >
 		   	</ListView>
 		     
 			<include 
 			    android:id="@+id/accounts_empty"
 			    android:layout_width="match_parent"
+			    android:padding="10dp"
 			    android:layout_height="wrap_content"
 			    layout="@layout/module_login_empty"/>
 		 </LinearLayout>

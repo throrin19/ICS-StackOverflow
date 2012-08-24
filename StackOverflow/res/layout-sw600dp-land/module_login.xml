@@ -13,36 +13,43 @@
 		android:layout_weight="1"
         android:src="@drawable/logo" />
 
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/details_gray" 
+        />
+    
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_weight="1"
         android:gravity="center"
         android:orientation="vertical" >
-        
-        <Button
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:background="@color/details_gray"
+            android:orientation="vertical" >
+            
+            <Button
             android:id="@+id/register"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="20dp"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:drawableRight="@drawable/ic_user_add"
             android:text="@string/login_add_account" />
-        
+        </LinearLayout>
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:gravity="center|top"
-            android:orientation="vertical"
-            android:padding="10dp" >
+            android:orientation="vertical" >
 	        
             <ListView
 	            android:id="@+id/accounts_list"
 	            android:layout_width="match_parent"
 	            android:layout_height="wrap_content"
-	            android:layout_marginTop="40dp"
-	        	android:layout_marginBottom="50dp"
 	            android:visibility="gone" >
 	        </ListView>
 	        

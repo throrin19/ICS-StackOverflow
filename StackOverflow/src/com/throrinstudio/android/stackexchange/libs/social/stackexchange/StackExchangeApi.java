@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 
+import android.app.Activity;
+import android.os.Handler;
+
 import com.throrinstudio.android.stackexchange.libs.social.stackexchange.requesters.StackExchangeRequester;
 
 /**
@@ -30,7 +33,9 @@ public class StackExchangeApi {
 	
 	private static final String API_URL = "https://api.stackexchange.com";
 	
-	public void getSitesList(RequestListener listener){
+	private Handler mHandler = new Handler();
+	
+	public void getSitesList(Activity ctx, RequestListener listener){
 		
 		new Thread(){
 			@Override
@@ -40,13 +45,15 @@ public class StackExchangeApi {
 				StackExchangeRequester requester = new StackExchangeRequester();
 				final InputStream stream = requester.request(API_URL+"/sites");
 				
-				new Runnable() {
+				
+				
+				mHandler.post(new Runnable() {
+					
 					@Override
 					public void run() {
 						
-						
 					}
-				}.run();
+				});
 				
 			}		
 		}.start();

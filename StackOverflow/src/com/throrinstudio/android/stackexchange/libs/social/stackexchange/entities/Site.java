@@ -1,8 +1,9 @@
 package com.throrinstudio.android.stackexchange.libs.social.stackexchange.entities;
 
 import java.util.Date;
+import java.util.List;
 
-public class Site {
+public class Site extends AbstractEntity {
 
 	public static enum SiteState{
 		normal, closed_beta, open_beta, linked_meta
@@ -12,42 +13,39 @@ public class Site {
 		main_site, meta_site
 	};
 	
-	private String[] 	aliases;
-	private String 		apiSiteParameter;
-	private String 		audience;
-	private Date 		closedBetaDate;
-	private String 		faviconUrl;
-	private String 		highResolutionIconUrl;
-	private String 		iconUrl;
-	private Date 		launchDate;
-	private String 		logoUrl;
-	private String[] 	markdownExtensions;
-	private String 		name;
-	private Date 		openBetaDate;
-	private String[] 	relatedSites;
-	private String 		siteUrl;
-	private String 		twitterAccount;
+	private List<String>		aliases;
+	private String 				apiSiteParameter;
+	private String 				audience;
+	private Date 				closedBetaDate;
+	private String 				faviconUrl;
+	private String 				highResolutionIconUrl;
+	private String 				iconUrl;
+	private Date 				launchDate;
+	private String 				logoUrl;
+	private List<String>		markdownExtensions;
+	private String 				name;
+	private Date 				openBetaDate;
+	private List<RelatedSite> 	relatedSites;
+	private String 				siteUrl;
+	private String 				twitterAccount;
 	
-	private SiteType 	siteType;
-	private SiteState 	siteState;
+	private SiteType 			siteType;
+	private SiteState 			siteState;
 	
-	private Styling		styling;
-
-	
-	
+	private Styling				styling;
 	
 	
 	/**
 	 * @return the aliases
 	 */
-	public String[] getAliases() {
+	public List<String> getAliases() {
 		return aliases;
 	}
 
 	/**
 	 * @param aliases the aliases to set
 	 */
-	public void setAliases(String[] aliases) {
+	public void setAliases(List<String> aliases) {
 		this.aliases = aliases;
 	}
 
@@ -166,14 +164,14 @@ public class Site {
 	/**
 	 * @return the markdownExtensions
 	 */
-	public String[] getMarkdownExtensions() {
+	public List<String> getMarkdownExtensions() {
 		return markdownExtensions;
 	}
 
 	/**
 	 * @param markdownExtensions the markdownExtensions to set
 	 */
-	public void setMarkdownExtensions(String[] markdownExtensions) {
+	public void setMarkdownExtensions(List<String> markdownExtensions) {
 		this.markdownExtensions = markdownExtensions;
 	}
 
@@ -208,14 +206,14 @@ public class Site {
 	/**
 	 * @return the relatedSites
 	 */
-	public String[] getRelatedSites() {
+	public List<RelatedSite> getRelatedSites() {
 		return relatedSites;
 	}
 
 	/**
 	 * @param relatedSites the relatedSites to set
 	 */
-	public void setRelatedSites(String[] relatedSites) {
+	public void setRelatedSites(List<RelatedSite> relatedSites) {
 		this.relatedSites = relatedSites;
 	}
 
@@ -290,4 +288,95 @@ public class Site {
 	}
 	
 	
+	public static class Styling extends AbstractEntity {
+
+		private String linkColor;
+		private String tagBackgroundColor;
+		private String tagForegroundColor;
+		
+		
+		/**
+		 * @return the linkColor
+		 */
+		public String getLinkColor() {
+			return linkColor;
+		}
+		/**
+		 * @param linkColor the linkColor to set
+		 */
+		public void setLinkColor(String linkColor) {
+			this.linkColor = linkColor;
+		}
+		/**
+		 * @return the tagBackgroundColor
+		 */
+		public String getTagBackgroundColor() {
+			return tagBackgroundColor;
+		}
+		/**
+		 * @param tagBackgroundColor the tagBackgroundColor to set
+		 */
+		public void setTagBackgroundColor(String tagBackgroundColor) {
+			this.tagBackgroundColor = tagBackgroundColor;
+		}
+		/**
+		 * @return the tagForegroundColor
+		 */
+		public String getTagForegroundColor() {
+			return tagForegroundColor;
+		}
+		/**
+		 * @param tagForegroundColor the tagForegroundColor to set
+		 */
+		public void setTagForegroundColor(String tagForegroundColor) {
+			this.tagForegroundColor = tagForegroundColor;
+		}
+	}
+	
+	public static class RelatedSite {
+
+		private String name;
+		private String siteUrl;
+		private String relation;
+		
+		
+		/**
+		 * @return the name
+		 */
+		public String getName() {
+			return name;
+		}
+		/**
+		 * @param name the name to set
+		 */
+		public void setName(String name) {
+			this.name = name;
+		}
+		/**
+		 * @return the siteUrl
+		 */
+		public String getSiteUrl() {
+			return siteUrl;
+		}
+		/**
+		 * @param siteUrl the siteUrl to set
+		 */
+		public void setSiteUrl(String siteUrl) {
+			this.siteUrl = siteUrl;
+		}
+		/**
+		 * @return the relation
+		 */
+		public String getRelation() {
+			return relation;
+		}
+		/**
+		 * @param relation the relation to set
+		 */
+		public void setRelation(String relation) {
+			this.relation = relation;
+		}
+		
+		
+	}
 }

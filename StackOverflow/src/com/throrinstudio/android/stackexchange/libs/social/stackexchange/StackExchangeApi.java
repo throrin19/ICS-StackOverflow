@@ -4,10 +4,14 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
+import java.util.List;
 
 import android.app.Activity;
 import android.os.Handler;
 
+import com.throrinstudio.android.stackexchange.libs.social.stackexchange.entities.Site;
+import com.throrinstudio.android.stackexchange.libs.social.stackexchange.mappers.MapperFacade;
+import com.throrinstudio.android.stackexchange.libs.social.stackexchange.mappers.MapperFacade.MapperType;
 import com.throrinstudio.android.stackexchange.libs.social.stackexchange.requesters.StackExchangeRequester;
 
 /**
@@ -35,7 +39,7 @@ public class StackExchangeApi {
 	
 	private Handler mHandler = new Handler();
 	
-	public void getSitesList(Activity ctx, RequestListener listener){
+	public void getSitesList(Activity ctx, final RequestListener listener){
 		
 		new Thread(){
 			@Override
@@ -43,15 +47,21 @@ public class StackExchangeApi {
 				super.run();
 				
 				StackExchangeRequester requester = new StackExchangeRequester();
-				final InputStream stream = requester.request(API_URL+"/sites");
+				MapperFacade<Site> mapper = new MapperFacade<Site>();
 				
+				InputStream stream = requester.request(API_URL+"/sites");
+				
+				final List<Site> sites = mapper.mapList(stream, MapperType.site);
 				
 				
 				mHandler.post(new Runnable() {
-					
 					@Override
 					public void run() {
-						
+						if(sites != null){
+							listener.onComplete(sites);
+						}else{
+							listener.onError(new StackExchangeError("Impossible de récupérer la liste des sites"), null);
+						}
 					}
 				});
 				
@@ -73,26 +83,12 @@ public class StackExchangeApi {
         /**
          * Called when a request completes with the given response.
          */
-        public void onComplete(String response, Object state);
+        public void onComplete(Object state);
 
         /**
          * Called when a request has a network or request error.
          */
         public void onIOException(IOException e, Object state);
-
-        /**
-         * Called when a request fails because the requested resource is
-         * invalid or does not exist.
-         */
-        public void onFileNotFoundException(FileNotFoundException e,
-                                            Object state);
-
-        /**
-         * Called if an invalid graph path is provided (which may result in a
-         * malformed URL).
-         */
-        public void onMalformedURLException(MalformedURLException e,
-                                            Object state);
 
         /**
          * Called when the server-side Facebook method fails.

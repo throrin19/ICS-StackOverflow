@@ -2,7 +2,7 @@ package com.throrinstudio.android.stackexchange.libs.social.stackexchange.entiti
 
 import java.util.Date;
 
-public class User {
+public class User extends AbstractEntity{
 
 	public static enum UserType{
 		unregistered, registered, moderator, does_not_exist

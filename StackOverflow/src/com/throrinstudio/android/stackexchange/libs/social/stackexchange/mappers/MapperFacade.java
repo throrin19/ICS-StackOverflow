@@ -33,6 +33,7 @@ public class MapperFacade<A extends AbstractEntity> {
 		mJsonParser = mJsonFactory.createJsonParser(stream);
 		mJsonParser.enable(JsonParser.Feature.ALLOW_UNQUOTED_CONTROL_CHARS);
 		mJsonParser.enable(JsonParser.Feature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER);
+		mJsonParser.nextToken();
 	}
 	
 	public static enum MapperType{

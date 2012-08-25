@@ -1,18 +1,28 @@
 package com.throrinstudio.android.stackexchange.modules.login;
 
+import java.io.IOException;
+import java.util.List;
+
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ListView;
 
+import com.throrinstudio.android.common.libs.widgets.dialogs.LoadingDialog;
 import com.throrinstudio.android.common.modules.basic.AbstractBasicModel;
 import com.throrinstudio.android.stackexchange.R;
-import com.throrinstudio.android.stackexchange.libs.social.stackexchange.StackExchangeApp;
+import com.throrinstudio.android.stackexchange.libs.social.stackexchange.StackExchangeApi;
+import com.throrinstudio.android.stackexchange.libs.social.stackexchange.StackExchangeApi.RequestListener;
+import com.throrinstudio.android.stackexchange.libs.social.stackexchange.StackExchangeError;
+import com.throrinstudio.android.stackexchange.libs.social.stackexchange.entities.Site;
 import com.throrinstudio.android.stackexchange.modules.basic.AbstractStackBasicFragment;
-import com.throrinstudio.android.stackexchange.providers.LoginProvider;
 
 public class LoginFragment extends AbstractStackBasicFragment{
 
-	private Button registerButton;
+	private Button  		mAddButton;
+	private ListView 		mListAccounts;
+	private View			mEmptyView;
+	private LoadingDialog	mLoadingDialog;
 	
 	@Override
 	public int getFragmentLayoutResource() {
@@ -26,23 +36,53 @@ public class LoginFragment extends AbstractStackBasicFragment{
 	
 	@Override
 	protected void initViews() {
-		registerButton.setOnClickListener(new OnClickListener() {
+		mAddButton.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				StackExchangeApp stackApp = new StackExchangeApp(getActivity(), ((LoginProvider)mModel.getProvider()).getOauthUrl(), ((LoginProvider)mModel.getProvider()).getClientId());
-				stackApp.setRedirectUrl(((LoginProvider)mModel.getProvider()).getRedirectUri());
-				stackApp.setScopes(StackExchangeApp.SCOPE_NO_EXPIRY+","+StackExchangeApp.SCOPE_WRITE_ACCESS);
-				stackApp.authorize();
+				showListSites();
 			}
 		});
 	}
 
 	@Override
 	protected void bindViews(View v) {
-		registerButton = (Button) v.findViewById(R.id.register);
+		mAddButton 		= (Button) v.findViewById(R.id.register);
+		mListAccounts 	= (ListView) v.findViewById(R.id.accounts_list);
+		mEmptyView		= v.findViewById(R.id.accounts_empty);
 	}
 
 	
 
+	private void showListSites(){
+		
+		mLoadingDialog = LoadingDialog.newInstance("Chargement", "Veillez patienter...");
+		mLoadingDialog.show(getFragmentManager(), "loading");
+		
+		StackExchangeApi api = new StackExchangeApi();
+		api.getSitesList(getActivity(), mSitesRequestListener);
+	}
+	
+	private RequestListener mSitesRequestListener = new RequestListener() {
+		
+		@Override
+		public void onComplete(Object state) {
+			List<Site> sites = (List<Site>) state;
+			
+			if(mLoadingDialog != null)
+				mLoadingDialog.dismiss();
+		}
+		
+		@Override
+		public void onIOException(IOException e, Object state) {
+			if(mLoadingDialog != null)
+				mLoadingDialog.dismiss();
+		}
+		
+		@Override
+		public void onError(StackExchangeError e, Object state) {
+			if(mLoadingDialog != null)
+				mLoadingDialog.dismiss();
+		}
+	};
 }

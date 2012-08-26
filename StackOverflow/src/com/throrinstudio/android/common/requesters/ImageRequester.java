@@ -3,7 +3,7 @@ package com.throrinstudio.android.common.requesters;
 import java.io.InputStream;
 
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpGet;
 
 import com.throrinstudio.android.common.requesters.exceptions.NetworkException;
 import com.throrinstudio.android.common.requesters.exceptions.RequesterException;
@@ -19,7 +19,7 @@ public class ImageRequester extends AbstractRequester{
 		
 		if(checkNetworkWithG()){ // Si on a du réseau on effectue la requête. Sinon on ne fait rien
 			HttpClient client = initHttpClient();
-			HttpPost httpPost = new HttpPost((String) args[0]);
+			HttpGet httpPost = new HttpGet((String) args[0]);
 			
 			settDefaultHeaderOptions(httpPost);
 			

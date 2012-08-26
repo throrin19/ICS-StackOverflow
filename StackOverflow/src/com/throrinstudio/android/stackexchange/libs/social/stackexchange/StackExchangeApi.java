@@ -1,12 +1,10 @@
 package com.throrinstudio.android.stackexchange.libs.social.stackexchange;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.util.List;
 
-import android.app.Activity;
+import android.content.Context;
 import android.os.Handler;
 
 import com.throrinstudio.android.stackexchange.libs.social.stackexchange.entities.Site;
@@ -35,11 +33,11 @@ import com.throrinstudio.android.stackexchange.libs.social.stackexchange.request
  */
 public class StackExchangeApi {
 	
-	private static final String API_URL = "https://api.stackexchange.com";
+	private static final String API_URL = "https://api.stackexchange.com/2.0/";
 	
 	private Handler mHandler = new Handler();
 	
-	public void getSitesList(Activity ctx, final RequestListener listener){
+	public void getSitesList(Context ctx, final RequestListener listener){
 		
 		new Thread(){
 			@Override
@@ -49,7 +47,7 @@ public class StackExchangeApi {
 				StackExchangeRequester requester = new StackExchangeRequester();
 				MapperFacade<Site> mapper = new MapperFacade<Site>();
 				
-				InputStream stream = requester.request(API_URL+"/sites");
+				InputStream stream = requester.request(API_URL+"/sites/");
 				
 				final List<Site> sites = mapper.mapList(stream, MapperType.site);
 				

@@ -2,21 +2,21 @@ package com.throrinstudio.android.common.libs.widgets.dialogs;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.DialogFragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 
-import com.throrinstudio.android.common.libs.widgets.adapters.MenuItemAdapter;
 import com.throrinstudio.android.stackexchange.R;
 
 public class CustomDialog extends DialogFragment {
@@ -33,7 +33,7 @@ public class CustomDialog extends DialogFragment {
     private OnClickListener mNegativeListener;
     private OnClickListener mPositiveListener;
 
-    private MenuItemAdapter mAdapter;
+    private BaseAdapter mAdapter;
     private DialogInterface.OnClickListener mListListener;
     private OnResumeListener mResumeListener;
     private OnDismissListener mOnDismissListener;
@@ -116,7 +116,7 @@ public class CustomDialog extends DialogFragment {
         mView = LayoutView;
     }
 
-    private CustomDialog(Context ctx, String title, MenuItemAdapter adapter, DialogInterface.OnClickListener listener) {
+    private CustomDialog(Context ctx, String title, BaseAdapter adapter, DialogInterface.OnClickListener listener) {
         super();
         mKeyboard = false;
         mTitle = title;
@@ -154,7 +154,7 @@ public class CustomDialog extends DialogFragment {
         return i;
     }
 
-    public static CustomDialog newInstance(Context ctx, String title, MenuItemAdapter adapter, DialogInterface.OnClickListener listener) {
+    public static CustomDialog newInstance(Context ctx, String title, BaseAdapter adapter, DialogInterface.OnClickListener listener) {
         CustomDialog i = new CustomDialog(ctx, title, adapter, listener);
         return i;
     }

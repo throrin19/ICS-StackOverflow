@@ -1,9 +1,24 @@
 package com.throrinstudio.android.stackexchange.providers;
 
+import java.io.IOException;
+import java.util.List;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 
+import com.throrinstudio.android.common.libs.widgets.dialogs.CustomDialog;
+import com.throrinstudio.android.common.libs.widgets.dialogs.LoadingDialog;
 import com.throrinstudio.android.common.providers.BasicProvider;
+import com.throrinstudio.android.common.utils.LogManager;
+import com.throrinstudio.android.stackexchange.R;
+import com.throrinstudio.android.stackexchange.libs.social.stackexchange.StackExchangeApi;
+import com.throrinstudio.android.stackexchange.libs.social.stackexchange.StackExchangeApi.RequestListener;
+import com.throrinstudio.android.stackexchange.libs.social.stackexchange.StackExchangeError;
+import com.throrinstudio.android.stackexchange.libs.social.stackexchange.entities.Site;
 import com.throrinstudio.android.stackexchange.libs.social.stackexchange.utils.StackExchangeApiUtils;
+import com.throrinstudio.android.stackexchange.modules.login.adapters.SitesAdapter;
 
 public class LoginProvider extends BasicProvider{
 
@@ -24,4 +39,56 @@ public class LoginProvider extends BasicProvider{
 	public String getRedirectUri(){
 		return StackExchangeApiUtils.getRedirectUrl();
 	}
+	
+	
+	public void showSitesList(final LoadingDialog loadingDialog, final Activity ctx){
+		
+		RequestListener sitesRequestListener = new RequestListener() {
+			
+			@SuppressWarnings("unchecked")
+			@Override
+			public void onComplete(Object state) {
+				LogManager.logInformation("Liste de sites bien récupérée");
+				
+				if(loadingDialog != null)
+					loadingDialog.dismiss();
+				
+				showSiteListTask((List<Site>) state, ctx);
+			}
+			
+			@Override
+			public void onIOException(IOException e, Object state) {
+				if(loadingDialog != null)
+					loadingDialog.dismiss();
+			}
+			
+			@Override
+			public void onError(StackExchangeError e, Object state) {
+				if(loadingDialog != null)
+					loadingDialog.dismiss();
+			}
+		};
+		
+		
+		StackExchangeApi api = new StackExchangeApi();
+		api.getSitesList(ctx, sitesRequestListener);
+		
+		
+	}
+	
+	private void showSiteListTask(List<Site> sites, Activity ctx){
+		
+		SitesAdapter adapter = new SitesAdapter(ctx, sites);
+		CustomDialog dialog = CustomDialog.newInstance(ctx, ctx.getString(R.string.login_site), adapter, mSitesActionListener);
+		dialog.show(ctx.getFragmentManager(), "choiceSites");
+	}
+	
+	private DialogInterface.OnClickListener mSitesActionListener = new DialogInterface.OnClickListener() {
+		
+		@Override
+		public void onClick(DialogInterface dialog, int which) {
+			// TODO Auto-generated method stub
+			
+		}
+	};
 }

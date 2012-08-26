@@ -32,22 +32,22 @@ public class SiteMapper extends AbstractMapper{
 			
 		if(elem.has("site_type")){
 			site.setSiteType(SiteType.valueOf(elem.get("site_type").getTextValue()));
-		}else 
+		}
 		if(elem.has("name")){
 			site.setName(elem.get("name").getTextValue());
-		}else 
+		}
 		if(elem.has("logo_url")){
 			site.setLogoUrl(elem.get("logo_url").getTextValue());
-		}else
+		}
 		if(elem.has("api_site_parameter")){
 			site.setApiSiteParameter(elem.get("api_site_parameter").getTextValue());
-		}else
+		}
 		if(elem.has("site_url")){
 			site.setSiteUrl(elem.get("site_url").getTextValue());
-		}else 
+		}
 		if(elem.has("audience")){
 			site.setAudience(elem.get("audience").getTextValue());
-		}else 
+		}
 		if(elem.has("aliases")){
 			Iterator<JsonNode> aliases = elem.get("aliases").getElements();
 			
@@ -57,31 +57,34 @@ public class SiteMapper extends AbstractMapper{
 				aliasesList.add(aliases.next().getTextValue());
 			}
 			site.setAliases(aliasesList);
-		}else
+		}
 		if(elem.has("site_state")){
 			site.setSiteState(SiteState.valueOf(elem.get("site_state").getTextValue()));
-		}else
+		}
 		if(elem.has("styling")){
 			JsonNode stylingNode = elem.get("styling");
 			Site.Styling styling = new Site.Styling();
 			
 			if(stylingNode.has("link_color")){
 				styling.setLinkColor(stylingNode.get("link_color").getTextValue());
-			}else
+			}
 			if(stylingNode.has("tag_foreground_color")){
 				styling.setTagForegroundColor(stylingNode.get("tag_foreground_color").getTextValue());
-			}else
+			}
 			if(stylingNode.has("tag_background_color")){
 				styling.setTagBackgroundColor(stylingNode.get("tag_background_color").getTextValue());
 			}
 			site.setStyling(styling);
-		}else 
+		}
 		if(elem.has("launch_date")){
 			site.setLaunchDate(new Date(elem.get("launch_date").getLongValue()*1000));
-		}else 
+		}
 		if(elem.has("favicon_url")){
 			site.setFaviconUrl(elem.get("favicon_url").getTextValue());
-		}else
+		}
+		if(elem.has("icon_url")){
+			site.setIconUrl(elem.get("icon_url").getTextValue());
+		}
 		if(elem.has("related_sites")){
 			
 			Iterator<JsonNode> relateds = elem.get("related_sites").getElements();
@@ -95,10 +98,10 @@ public class SiteMapper extends AbstractMapper{
 				
 				if(relatedNode.has("name")){
 					relatedSite.setName(relatedNode.get("name").getTextValue());
-				}else
+				}
 				if(relatedNode.has("site_url")){
 					relatedSite.setSiteUrl(relatedNode.get("site_url").getTextValue());
-				}else
+				}
 				if(relatedNode.has("relation")){
 					relatedSite.setRelation(relatedNode.get("relation").getTextValue());
 				}
@@ -108,7 +111,7 @@ public class SiteMapper extends AbstractMapper{
 			
 			site.setRelatedSites(relatedArray);
 			
-		}else
+		}
 		if(elem.has("markdown_extensions")){
 			Iterator<JsonNode> markdown = elem.get("markdown_extensions").getElements();
 			
@@ -118,16 +121,16 @@ public class SiteMapper extends AbstractMapper{
 				markdownList.add(markdown.next().getTextValue());
 			}
 			site.setMarkdownExtensions(markdownList);
-		}else
+		}
 		if(elem.has("high_resolution_icon_url")){
 			site.setHighResolutionIconUrl(elem.get("high_resolution_icon_url").getTextValue());
-		}else
+		}
 		if(elem.has("open_beta_date")){
 			site.setOpenBetaDate(new Date(elem.get("open_beta_date").getLongValue()*1000));
-		}else
+		}
 		if(elem.has("closed_beta_date")){
 			site.setClosedBetaDate(new Date(elem.get("closed_beta_date").getLongValue()*1000));
-		}else
+		}
 		if(elem.has("twitter_account")){
 			site.setTwitterAccount(elem.get("twitter_account").getTextValue());
 		}

@@ -1,8 +1,5 @@
 package com.throrinstudio.android.stackexchange.modules.login;
 
-import java.io.IOException;
-import java.util.List;
-
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -11,11 +8,8 @@ import android.widget.ListView;
 import com.throrinstudio.android.common.libs.widgets.dialogs.LoadingDialog;
 import com.throrinstudio.android.common.modules.basic.AbstractBasicModel;
 import com.throrinstudio.android.stackexchange.R;
-import com.throrinstudio.android.stackexchange.libs.social.stackexchange.StackExchangeApi;
-import com.throrinstudio.android.stackexchange.libs.social.stackexchange.StackExchangeApi.RequestListener;
-import com.throrinstudio.android.stackexchange.libs.social.stackexchange.StackExchangeError;
-import com.throrinstudio.android.stackexchange.libs.social.stackexchange.entities.Site;
 import com.throrinstudio.android.stackexchange.modules.basic.AbstractStackBasicFragment;
+import com.throrinstudio.android.stackexchange.providers.LoginProvider;
 
 public class LoginFragment extends AbstractStackBasicFragment{
 
@@ -59,30 +53,8 @@ public class LoginFragment extends AbstractStackBasicFragment{
 		mLoadingDialog = LoadingDialog.newInstance("Chargement", "Veillez patienter...");
 		mLoadingDialog.show(getFragmentManager(), "loading");
 		
-		StackExchangeApi api = new StackExchangeApi();
-		api.getSitesList(getActivity(), mSitesRequestListener);
+		((LoginProvider)mModel.getProvider()).showSitesList(mLoadingDialog, getActivity());
 	}
 	
-	private RequestListener mSitesRequestListener = new RequestListener() {
-		
-		@Override
-		public void onComplete(Object state) {
-			List<Site> sites = (List<Site>) state;
-			
-			if(mLoadingDialog != null)
-				mLoadingDialog.dismiss();
-		}
-		
-		@Override
-		public void onIOException(IOException e, Object state) {
-			if(mLoadingDialog != null)
-				mLoadingDialog.dismiss();
-		}
-		
-		@Override
-		public void onError(StackExchangeError e, Object state) {
-			if(mLoadingDialog != null)
-				mLoadingDialog.dismiss();
-		}
-	};
+	
 }

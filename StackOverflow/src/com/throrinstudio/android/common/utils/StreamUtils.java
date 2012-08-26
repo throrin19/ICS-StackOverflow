@@ -19,7 +19,9 @@ public class StreamUtils {
               os.write(bytes, 0, count);
             }
         }
-        catch(Exception ex){}
+        catch(Exception ex){
+        	ex.printStackTrace();
+        }
     }
     
     public static String getInflatedString(InputStream inputStream){

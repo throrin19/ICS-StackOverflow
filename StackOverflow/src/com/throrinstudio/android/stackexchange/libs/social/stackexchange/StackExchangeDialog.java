@@ -171,7 +171,7 @@ public class StackExchangeDialog extends DialogFragment{
         		}
         		
         		
-        		StackExchangeDialog.this.dismiss();
+        		StackExchangeDialog.this.dismiss();   
         		
         		return true;
         	}

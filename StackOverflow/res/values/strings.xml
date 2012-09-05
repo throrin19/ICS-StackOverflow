@@ -48,4 +48,5 @@
     <string name="login_account_empty">No accounts</string>
     <string name="login_account_empty_summary">You do not currently attached an account.\nPlease click on this button to add one.</string>
     <string name="login_site">Select your Stack Site</string>
+    <string name="login_error">An error has occurred during authentication.</string>
 </resources>

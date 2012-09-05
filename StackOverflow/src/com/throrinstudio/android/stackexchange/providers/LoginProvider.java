@@ -12,21 +12,21 @@ import com.throrinstudio.android.common.libs.widgets.dialogs.CustomDialog;
 import com.throrinstudio.android.common.libs.widgets.dialogs.LoadingDialog;
 import com.throrinstudio.android.common.providers.BasicProvider;
 import com.throrinstudio.android.common.utils.LogManager;
+import com.throrinstudio.android.stackexchange.Application;
 import com.throrinstudio.android.stackexchange.R;
 import com.throrinstudio.android.stackexchange.libs.social.stackexchange.StackExchangeApi;
+import com.throrinstudio.android.stackexchange.libs.social.stackexchange.StackExchangeApp;
 import com.throrinstudio.android.stackexchange.libs.social.stackexchange.StackExchangeApi.RequestListener;
 import com.throrinstudio.android.stackexchange.libs.social.stackexchange.StackExchangeError;
 import com.throrinstudio.android.stackexchange.libs.social.stackexchange.entities.Site;
 import com.throrinstudio.android.stackexchange.libs.social.stackexchange.utils.StackExchangeApiUtils;
 import com.throrinstudio.android.stackexchange.modules.login.adapters.SitesAdapter;
+import com.throrinstudio.android.stackexchange.modules.login.listeners.LoginListener;
 
 public class LoginProvider extends BasicProvider{
 
-
-	public Uri getRegistrationUrl(){
-		return Uri.parse("http://stackoverflow.com/users/login#create-account");
-	}
-	
+	private SitesAdapter mSitesAdapter;
+	private Activity mActivity;
 	
 	public String getOauthUrl(){
 		return StackExchangeApiUtils.getOauthUrl();
@@ -43,6 +43,7 @@ public class LoginProvider extends BasicProvider{
 	
 	public void showSitesList(final LoadingDialog loadingDialog, final Activity ctx){
 		
+		mActivity 							 = ctx;
 		RequestListener sitesRequestListener = new RequestListener() {
 			
 			@SuppressWarnings("unchecked")
@@ -75,20 +76,25 @@ public class LoginProvider extends BasicProvider{
 		
 		
 	}
-	
+
 	private void showSiteListTask(List<Site> sites, Activity ctx){
 		
-		SitesAdapter adapter = new SitesAdapter(ctx, sites);
-		CustomDialog dialog = CustomDialog.newInstance(ctx, ctx.getString(R.string.login_site), adapter, mSitesActionListener);
+		mSitesAdapter = new SitesAdapter(ctx, sites);
+		CustomDialog dialog = CustomDialog.newInstance(ctx, ctx.getString(R.string.login_site), mSitesAdapter, mSitesActionListener);
 		dialog.show(ctx.getFragmentManager(), "choiceSites");
 	}
 	
 	private DialogInterface.OnClickListener mSitesActionListener = new DialogInterface.OnClickListener() {
 		
 		@Override
-		public void onClick(DialogInterface dialog, int which) {
-			// TODO Auto-generated method stub
+		public void onClick(DialogInterface dialog, int pos) {
+			Site site 				= mSitesAdapter.getItem(pos);
+			LoginListener listener 	= new LoginListener(mActivity);
 			
+			StackExchangeApp stackApp = new StackExchangeApp(mActivity, StackExchangeApiUtils.getOauthUrl(), StackExchangeApiUtils.getAppId());
+		 	stackApp.setRedirectUrl(StackExchangeApiUtils.getRedirectUrl());
+		 	stackApp.setScopes(StackExchangeApp.SCOPE_NO_EXPIRY+","+StackExchangeApp.SCOPE_WRITE_ACCESS);
+		 	stackApp.authorize(listener);
 		}
 	};
 }

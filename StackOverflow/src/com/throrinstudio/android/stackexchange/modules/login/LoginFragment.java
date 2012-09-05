@@ -8,6 +8,7 @@ import android.widget.ListView;
 import com.throrinstudio.android.common.libs.widgets.dialogs.LoadingDialog;
 import com.throrinstudio.android.common.modules.basic.AbstractBasicModel;
 import com.throrinstudio.android.stackexchange.R;
+import com.throrinstudio.android.stackexchange.libs.social.stackexchange.StackExchangeApp;
 import com.throrinstudio.android.stackexchange.modules.basic.AbstractStackBasicFragment;
 import com.throrinstudio.android.stackexchange.providers.LoginProvider;
 
@@ -49,7 +50,6 @@ public class LoginFragment extends AbstractStackBasicFragment{
 	
 
 	private void showListSites(){
-		
 		mLoadingDialog = LoadingDialog.newInstance("Chargement", "Veillez patienter...");
 		mLoadingDialog.show(getFragmentManager(), "loading");
 		

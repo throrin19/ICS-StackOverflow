@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
@@ -37,7 +38,7 @@ public class StackExchangeDialog extends DialogFragment{
     
     private Context				mContext;
     private String 				mUrl;
-    private SoDialogListener 	mListener;
+    private SeDialogListener 	mListener;
     private ProgressDialog 		mSpinner;
     private WebView 			mWebView;
     private LinearLayout 		mContent;
@@ -48,7 +49,7 @@ public class StackExchangeDialog extends DialogFragment{
     private static final String TAG = "StackOverflow-WebView";
 	
 
-    private StackExchangeDialog(Context context, String url, SoDialogListener listener) {
+    private StackExchangeDialog(Context context, String url, SeDialogListener listener) {
         super();
         
         mUrl 		= url;
@@ -61,7 +62,7 @@ public class StackExchangeDialog extends DialogFragment{
     	return mContext;
     }
     
-    public static StackExchangeDialog newInstance(Context c, String url, SoDialogListener l){
+    public static StackExchangeDialog newInstance(Context c, String url, SeDialogListener l){
     	return new StackExchangeDialog(c, url, l);
     }
     
@@ -161,7 +162,14 @@ public class StackExchangeDialog extends DialogFragment{
         	
         	if (url.startsWith(mCallback)) {
         		Log.d(TAG, "CallBack");
-        		//mListener.onComplete(url);
+        		
+        		String response = url.replace(mCallback, "");
+        		if(response.startsWith("#access_token=")){
+        			mListener.onComplete(response.replace("#access_token=", ""));
+        		}else{
+        			mListener.onError(mContext.getString(R.string.login_error));
+        		}
+        		
         		
         		StackExchangeDialog.this.dismiss();
         		
@@ -197,7 +205,7 @@ public class StackExchangeDialog extends DialogFragment{
     }
     
     
-    public interface SoDialogListener {
+    public interface SeDialogListener {
 		public void onComplete(String value);
 	
 		public void onError(String value);

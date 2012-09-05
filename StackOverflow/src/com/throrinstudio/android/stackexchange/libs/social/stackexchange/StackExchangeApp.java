@@ -2,6 +2,8 @@ package com.throrinstudio.android.stackexchange.libs.social.stackexchange;
 
 import java.io.IOException;
 
+import com.throrinstudio.android.stackexchange.libs.social.stackexchange.StackExchangeDialog.SeDialogListener;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
@@ -41,7 +43,7 @@ public class StackExchangeApp {
 		mRedirect = url;
 	}
 	
-	public void authorize(){
+	public void authorize(final AuthorizeListener listener){
 		// Fonction qui va appeler notre dialog si utile
 		try {
 			validParams();
@@ -57,7 +59,29 @@ public class StackExchangeApp {
 			}
 			b.appendQueryParameter("response_type", "token");
 			
-			StackExchangeDialog.newInstance(mActivity, b.toString(), null).show(mActivity.getFragmentManager(), "StackDialog");
+			SeDialogListener dialogListener = new SeDialogListener() {
+				@Override
+				public void onError(final String value) {
+					mHandler.post(new Runnable() {
+						@Override
+						public void run() {
+							listener.onError(value);
+						}
+					});
+				}
+				@Override
+				public void onComplete(final String value) {
+					mHandler.post(new Runnable() {
+						@Override
+						public void run() {
+							listener.onSuccess(value);
+						}
+					});
+				}
+			};
+			
+			
+			StackExchangeDialog.newInstance(mActivity, b.toString(), dialogListener).show(mActivity.getFragmentManager(), "StackDialog");
 			
 			
 		} catch (IOException e) {
@@ -71,11 +95,10 @@ public class StackExchangeApp {
 		}
 	}
 	
-	private Handler mHandler = new Handler() {
-		@Override
-		public void handleMessage(Message msg) {
-			
-			
-		}
-	};
+	private Handler mHandler = new Handler();
+	
+	public static interface AuthorizeListener{
+		public void onSuccess(String value);
+		public void onError(String value);
+	}
 }

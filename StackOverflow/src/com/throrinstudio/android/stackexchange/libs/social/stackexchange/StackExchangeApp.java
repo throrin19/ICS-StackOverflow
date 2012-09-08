@@ -2,14 +2,12 @@ package com.throrinstudio.android.stackexchange.libs.social.stackexchange;
 
 import java.io.IOException;
 
-import com.throrinstudio.android.stackexchange.libs.social.stackexchange.StackExchangeDialog.SeDialogListener;
-
 import android.app.Activity;
-import android.content.Intent;
 import android.net.Uri;
 import android.net.Uri.Builder;
 import android.os.Handler;
-import android.os.Message;
+
+import com.throrinstudio.android.stackexchange.libs.social.stackexchange.StackExchangeDialog.SeDialogListener;
 
 public class StackExchangeApp {
 
@@ -24,10 +22,10 @@ public class StackExchangeApp {
 	public static final String SCOPE_WRITE_ACCESS 	= "write_access";
 	public static final String SCOPE_PRIVATE_INFO	= "private_info";
 	
-	private static final String PARAM_CLIENT_ID 	= "client_id";
-	private static final String PARAM_SCOPE 		= "scope";
-	private static final String PARAM_REDIRECT 		= "redirect_uri";
-	private static final String PARAM_STATE 		= "state";
+	public static final String PARAM_CLIENT_ID 		= "client_id";
+	public static final String PARAM_SCOPE 			= "scope";
+	public static final String PARAM_REDIRECT 		= "redirect_uri";
+	public static final String PARAM_STATE 			= "state";
 	
 	public StackExchangeApp(Activity a, String signUrl, String clientId){
 		mActivity 		= a;

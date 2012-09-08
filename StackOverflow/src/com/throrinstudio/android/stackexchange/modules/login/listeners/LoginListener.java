@@ -5,6 +5,9 @@ import android.app.Activity;
 import com.throrinstudio.android.common.utils.LogManager;
 import com.throrinstudio.android.stackexchange.libs.social.stackexchange.StackExchangeApp.AuthorizeListener;
 
+import de.neofonie.mobile.app.android.widget.crouton.Crouton;
+import de.neofonie.mobile.app.android.widget.crouton.Style;
+
 public class LoginListener implements AuthorizeListener{
 
 	private Activity mActivity;
@@ -21,7 +24,6 @@ public class LoginListener implements AuthorizeListener{
 
 	@Override
 	public void onError(String value) {
-		LogManager.logInformation("error");
-		LogManager.logInformation(value);
+		Crouton.makeText(mActivity, value, Style.ALERT).show();
 	}
 }

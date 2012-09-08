@@ -163,13 +163,15 @@ public class StackExchangeDialog extends DialogFragment{
         	if (url.startsWith(mCallback)) {
         		Log.d(TAG, "CallBack");
         		
-        		String response = url.replace(mCallback, "");
-        		if(response.startsWith("#access_token=")){
-        			mListener.onComplete(response.replace("#access_token=", ""));
+        		Uri response = Uri.parse(url);
+        		
+        		String token = response.getEncodedFragment();
+        		
+        		if(token.startsWith("access_token=")){
+        			mListener.onComplete(token.replace("access_token=", ""));
         		}else{
         			mListener.onError(mContext.getString(R.string.login_error));
         		}
-        		
         		
         		StackExchangeDialog.this.dismiss();   
         		

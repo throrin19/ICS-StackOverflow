@@ -22,7 +22,7 @@ public class LoginListener implements AuthorizeListener{
 	public void onSuccess(String token) {
 		LogManager.logInformation("token bien récupéré. Maintenant, lancement du /me");
 		
-		
+		LogManager.logInformation("token = "+token);
 	}
 
 	@Override

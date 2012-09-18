@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.Display;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.webkit.CookieManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -129,6 +130,9 @@ public class StackExchangeDialog extends DialogFragment{
     @SuppressLint("SetJavaScriptEnabled")
 	private void setUpWebView() {
         mWebView = new WebView(getContext());
+        android.webkit.CookieManager.getInstance().removeAllCookie();
+        android.webkit.CookieManager.getInstance().removeSessionCookie();
+        
         
         mWebView.clearHistory();
 		mWebView.clearFormData();
@@ -139,14 +143,15 @@ public class StackExchangeDialog extends DialogFragment{
         mWebView.setWebViewClient(new StackWebViewClient());
         
         WebSettings settings = mWebView.getSettings();
-		settings.setSavePassword			(true);
-		settings.setSaveFormData			(true);
+		settings.setSavePassword			(false);
+		settings.setSaveFormData			(false);
 		settings.setJavaScriptEnabled		(true);
 		settings.setSupportZoom				(false);
 		settings.setCacheMode				(WebSettings.LOAD_CACHE_ELSE_NETWORK);
 		settings.setDomStorageEnabled		(true);
 		settings.setSupportMultipleWindows	(false);
-        
+		settings.setAppCacheEnabled			(false);
+		
         mWebView.loadUrl(mUrl);
         mWebView.setLayoutParams(FILL);
         
@@ -161,6 +166,8 @@ public class StackExchangeDialog extends DialogFragment{
         	
         	
         	if (url.startsWith(mCallback)) {
+        		android.webkit.CookieManager.getInstance().removeAllCookie();
+        		
         		Log.d(TAG, "CallBack");
         		
         		Uri response = Uri.parse(url);
@@ -172,6 +179,9 @@ public class StackExchangeDialog extends DialogFragment{
         		}else{
         			mListener.onError(mContext.getString(R.string.login_error));
         		}
+        		
+        		mWebView.destroy();
+        		mWebView = null;
         		
         		StackExchangeDialog.this.dismiss();   
         		

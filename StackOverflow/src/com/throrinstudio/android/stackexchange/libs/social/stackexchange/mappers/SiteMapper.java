@@ -16,7 +16,7 @@ import com.throrinstudio.android.stackexchange.libs.social.stackexchange.entitie
 import com.throrinstudio.android.stackexchange.libs.social.stackexchange.entities.Site.SiteState;
 import com.throrinstudio.android.stackexchange.libs.social.stackexchange.entities.Site.SiteType;
 
-public class SiteMapper extends AbstractMapper{
+public class SiteMapper extends AbstractMapper<Site>{
 
 	public SiteMapper(ObjectMapper mapper) {
 		super(mapper);
@@ -146,10 +146,12 @@ public class SiteMapper extends AbstractMapper{
 		List<Site> sites = new ArrayList<Site>();
 		
 		while(jp.nextToken() != JsonToken.END_OBJECT){
-			if(jp.getCurrentName().equals("items")){
-				while(jp.nextToken() != JsonToken.END_ARRAY){
-					jp.nextToken();
-					sites.add(map(jp));
+			if(jp.getCurrentName() != null){	
+				if(jp.getCurrentName().equals("items")){
+					while(jp.nextToken() != JsonToken.END_ARRAY){
+						jp.nextToken();
+						sites.add(map(jp));
+					}
 				}
 			}
 		}

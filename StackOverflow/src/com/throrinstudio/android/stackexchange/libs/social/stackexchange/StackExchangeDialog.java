@@ -47,11 +47,8 @@ public class StackExchangeDialog extends DialogFragment{
     private String				mCallback;
 
     private static final String TAG = "StackOverflow-WebView";
-	
-
+    
     private StackExchangeDialog(Context context, String url, SeDialogListener listener) {
-        super();
-        
         mUrl 		= url;
         mListener 	= listener;
         mContext	= context;

@@ -5,10 +5,8 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.throrinstudio.android.common.libs.widgets.dialogs.LoadingDialog;
 import com.throrinstudio.android.common.modules.basic.AbstractBasicModel;
 import com.throrinstudio.android.stackexchange.R;
-import com.throrinstudio.android.stackexchange.libs.social.stackexchange.StackExchangeApp;
 import com.throrinstudio.android.stackexchange.modules.basic.AbstractStackBasicFragment;
 import com.throrinstudio.android.stackexchange.providers.LoginProvider;
 
@@ -17,7 +15,6 @@ public class LoginFragment extends AbstractStackBasicFragment{
 	private Button  		mAddButton;
 	private ListView 		mListAccounts;
 	private View			mEmptyView;
-	private LoadingDialog	mLoadingDialog;
 	
 	@Override
 	public int getFragmentLayoutResource() {
@@ -35,7 +32,7 @@ public class LoginFragment extends AbstractStackBasicFragment{
 			
 			@Override
 			public void onClick(View v) {
-				showListSites();
+				((LoginProvider)mModel.getProvider()).login(getActivity());
 			}
 		});
 	}
@@ -46,15 +43,5 @@ public class LoginFragment extends AbstractStackBasicFragment{
 		mListAccounts 	= (ListView) v.findViewById(R.id.accounts_list);
 		mEmptyView		= v.findViewById(R.id.accounts_empty);
 	}
-
-	
-
-	private void showListSites(){
-		mLoadingDialog = LoadingDialog.newInstance("Chargement", "Veillez patienter...");
-		mLoadingDialog.show(getFragmentManager(), "loading");
-		
-		((LoginProvider)mModel.getProvider()).showSitesList(mLoadingDialog, getActivity());
-	}
-	
 	
 }

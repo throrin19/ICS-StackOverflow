@@ -12,17 +12,15 @@ import de.neofonie.mobile.app.android.widget.crouton.Style;
 public class LoginListener implements AuthorizeListener{
 
 	private Activity 	mActivity;
-	private Site 		mSite;
 	
-	public LoginListener(Activity a, Site site){
+	public LoginListener(Activity a){
 		mActivity = a;
 	}
 	
 	@Override
 	public void onSuccess(String token) {
-		LogManager.logInformation("token bien récupéré. Maintenant, lancement du /me");
-		
 		LogManager.logInformation("token = "+token);
+		
 	}
 
 	@Override

@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:drawableRight="@drawable/ic_user_add"
-            android:text="@string/login_add_account" />
+            android:text="@string/login_connect" />
         
         <LinearLayout
 		   	android:layout_width="fill_parent"

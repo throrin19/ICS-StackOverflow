@@ -19,7 +19,7 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".modules.login.LoginActivity"
-            android:configChanges="keyboardHidden"
+            android:configChanges="keyboardHidden|orientation"
             android:windowSoftInputMode="stateUnchanged|adjustPan" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,5 +1,7 @@
 package com.throrinstudio.android.stackexchange.libs.social.stackexchange;
 
+import java.io.Serializable;
+
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -48,32 +50,40 @@ public class StackExchangeDialog extends DialogFragment{
 
     private static final String TAG = "StackOverflow-WebView";
     
-    private StackExchangeDialog(Context context, String url, SeDialogListener listener) {
-        mUrl 		= url;
-        mListener 	= listener;
-        mContext	= context;
-        mCallback 	= DEFAULT_CALLBACK;
+    private static final String KEY_URL			= "key_url";
+    private static final String KEY_LISTENER	= "key_listener";
+    
+    
+    public StackExchangeDialog() {
+    	mCallback = DEFAULT_CALLBACK;
     };
     
-    private Context getContext(){
-    	return mContext;
-    }
-    
-    public static StackExchangeDialog newInstance(Context c, String url, SeDialogListener l){
-    	return new StackExchangeDialog(c, url, l);
+    public static StackExchangeDialog newInstance(String url, SeDialogListener l){
+    	StackExchangeDialog d = new StackExchangeDialog();
+    	Bundle args = new Bundle();
+    	args.putString(KEY_URL, url);
+    	args.putSerializable(KEY_LISTENER, l);
+    	d.setArguments(args);
+    	
+    	return d;
     }
     
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-    	Dialog d = new Dialog(mContext);
     	
-    	mSpinner = new ProgressDialog(getContext());
+    	Dialog d = new Dialog(getActivity());
+    	
+    	
+		mUrl 		= getArguments().getString(KEY_URL);
+		mListener	= (SeDialogListener) getArguments().getSerializable(KEY_LISTENER);
+		
+		mSpinner = new ProgressDialog(getActivity());
         
         mSpinner.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        mSpinner.setMessage(getContext().getString(R.string.global_loading)+"...");
+        mSpinner.setMessage(getActivity().getString(R.string.global_loading)+"...");
         mSpinner.setCanceledOnTouchOutside(false);
 
-        mContent = new LinearLayout(getContext());
+        mContent = new LinearLayout(getActivity());
         mContent.setOrientation(LinearLayout.VERTICAL);
         
         setUpTitle(d);
@@ -95,7 +105,7 @@ public class StackExchangeDialog extends DialogFragment{
         	d.addContentView(mContent, new FrameLayout.LayoutParams(display.getWidth(),
     				display.getHeight()));
         }
-        
+    	
         
         return d;
     }
@@ -108,11 +118,11 @@ public class StackExchangeDialog extends DialogFragment{
     private void setUpTitle(Dialog d) {
         d.requestWindowFeature(Window.FEATURE_NO_TITLE);
         
-        Drawable icon = getContext().getResources().getDrawable(R.drawable.ic_dialog_web);
+        Drawable icon = getActivity().getResources().getDrawable(R.drawable.ic_dialog_web);
         
-        mTitle = new TextView(getContext());
+        mTitle = new TextView(getActivity());
         
-        mTitle.setText(getContext().getString(R.string.app_name));
+        mTitle.setText(getActivity().getString(R.string.app_name));
         mTitle.setTextColor(Color.WHITE);
         mTitle.setTypeface(Typeface.DEFAULT_BOLD);
         mTitle.setBackgroundColor(0xFF3CBDEC);
@@ -125,7 +135,7 @@ public class StackExchangeDialog extends DialogFragment{
 
     @SuppressLint("SetJavaScriptEnabled")
 	private void setUpWebView() {
-        mWebView = new WebView(getContext());
+        mWebView = new WebView(getActivity());
         android.webkit.CookieManager.getInstance().removeAllCookie();
         android.webkit.CookieManager.getInstance().removeSessionCookie();
         
@@ -213,7 +223,7 @@ public class StackExchangeDialog extends DialogFragment{
     }
     
     
-    public interface SeDialogListener {
+    public interface SeDialogListener extends Serializable {
 		public void onComplete(String value);
 	
 		public void onError(String value);

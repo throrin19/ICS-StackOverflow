@@ -58,6 +58,8 @@ public class StackExchangeApp {
 			b.appendQueryParameter("response_type", "token");
 			
 			SeDialogListener dialogListener = new SeDialogListener() {
+				private static final long serialVersionUID = 1L;
+				
 				@Override
 				public void onError(final String value) {
 					mHandler.post(new Runnable() {
@@ -79,7 +81,7 @@ public class StackExchangeApp {
 			};
 			
 			
-			StackExchangeDialog.newInstance(mActivity, b.toString(), dialogListener).show(mActivity.getFragmentManager(), "StackDialog");
+			StackExchangeDialog.newInstance(b.toString(), dialogListener).show(mActivity.getFragmentManager(), "StackDialog");
 			
 			
 		} catch (IOException e) {

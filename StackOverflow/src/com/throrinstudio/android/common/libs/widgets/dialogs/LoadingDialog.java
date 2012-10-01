@@ -38,7 +38,7 @@ public class LoadingDialog extends DialogFragment implements Serializable {
     /**
      * Ctor
      */
-    private LoadingDialog() {
+    public LoadingDialog() {
     }
 
     /**

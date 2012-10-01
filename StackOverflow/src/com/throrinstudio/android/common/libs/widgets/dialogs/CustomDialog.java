@@ -5,12 +5,12 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.ContextThemeWrapper;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -40,11 +40,9 @@ public class CustomDialog extends DialogFragment {
     private OnShowListener mShowListener;
 	private OnCancelListener mOnCancelListener;
 
-    private CustomDialog(Context ctx, String title, Drawable icon, int LayoutView) {
+    private CustomDialog() {
         super();
         mKeyboard = false;
-        mTitle = title;
-        mIconTitle = icon;
 
         mNegativeListener = new OnClickListener() {
             @Override
@@ -59,103 +57,27 @@ public class CustomDialog extends DialogFragment {
             }
         };
 
-        mPositiveLabel = ctx.getString(R.string.global_submit);
-        mNegativeLabel = ctx.getString(R.string.global_cancel);
-
-
-        LayoutInflater inflater = (LayoutInflater) ctx
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        mView = inflater.inflate(LayoutView, null);
-    }
-
-    private CustomDialog(Context ctx, String title, String content) {
-    	super();
-        mTitle = title;
-        mContent = content;
-        mKeyboard = false;
-        mNegativeListener = new OnClickListener() {
-            @Override
-            public void onClick(Dialog dialog) {
-                dialog.dismiss();
-            }
-        };
-        mPositiveListener = new OnClickListener() {
-            @Override
-            public void onClick(Dialog dialog) {
-                dialog.dismiss();
-            }
-        };
-
-        mPositiveLabel = ctx.getString(R.string.global_submit);
-        mNegativeLabel = ctx.getString(R.string.global_cancel);
-    }
-
-    private CustomDialog(Context ctx, String title, Drawable icon, View LayoutView) {
-        super();
-        mKeyboard = false;
-        mTitle = title;
-        mIconTitle = icon;
-
-        mNegativeListener = new OnClickListener() {
-            @Override
-            public void onClick(Dialog dialog) {
-                dialog.dismiss();
-            }
-        };
-        mPositiveListener = new OnClickListener() {
-            @Override
-            public void onClick(Dialog dialog) {
-                dialog.dismiss();
-            }
-        };
-
-        mPositiveLabel = ctx.getString(R.string.global_submit);
-        mNegativeLabel = ctx.getString(R.string.global_cancel);
-
-        mView = LayoutView;
-    }
-
-    private CustomDialog(Context ctx, String title, BaseAdapter adapter, DialogInterface.OnClickListener listener) {
-        super();
-        mKeyboard = false;
-        mTitle = title;
-        mAdapter = adapter;
-        mListListener = listener;
+        mPositiveLabel = getActivity().getString(R.string.global_submit);
+        mNegativeLabel = getActivity().getString(R.string.global_cancel);
     }
 
     public void setKeyboardVisible(boolean visible) {
         mKeyboard = visible;
     }
 
-    public static CustomDialog newInstance(Context ctx, String title, int viewLayout) {
-        return newInstance(ctx, title, null, viewLayout);
+    public static CustomDialog newInstance(String title, int viewLayout) {
+        return newInstance(title, null, viewLayout);
     }
 
-    public static CustomDialog newInstance(Context ctx, String title, Drawable img, int viewLayout) {
-        CustomDialog i = new CustomDialog(ctx, title, img, viewLayout);
+    public static CustomDialog newInstance(String title, Drawable img, int viewLayout) {
+        CustomDialog i = new CustomDialog();
 
         return i;
     }
 
-    public static CustomDialog newInstance(Context ctx, String title, String content) {
-        CustomDialog i = new CustomDialog(ctx, title, content);
+    public static CustomDialog newInstance(String title, String content) {
+        CustomDialog i = new CustomDialog();
 
-        return i;
-    }
-
-    public static CustomDialog newInstance(Context ctx, String title, View viewLayout) {
-        return newInstance(ctx, title, null, viewLayout);
-    }
-
-    public static CustomDialog newInstance(Context ctx, String title, Drawable img, View viewLayout) {
-        CustomDialog i = new CustomDialog(ctx, title, img, viewLayout);
-
-        return i;
-    }
-
-    public static CustomDialog newInstance(Context ctx, String title, BaseAdapter adapter, DialogInterface.OnClickListener listener) {
-        CustomDialog i = new CustomDialog(ctx, title, adapter, listener);
         return i;
     }
 
@@ -202,6 +124,18 @@ public class CustomDialog extends DialogFragment {
 
     public void removePadding() {
         mRemovePadding = true;
+    }
+    
+    public void setIconTitle(Drawable icon){
+    	mIconTitle = icon;
+    }
+    
+    public void setIconTitle(int res){
+    	mIconTitle = getActivity().getResources().getDrawable(res);
+    }
+    
+    public void setIconTitle(Bitmap b){
+    	mIconTitle = new BitmapDrawable(null, b);
     }
 
 

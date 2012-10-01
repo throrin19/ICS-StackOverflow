@@ -19,10 +19,8 @@ public class ExceptionDialog extends DialogFragment implements
         android.content.DialogInterface.OnClickListener {
     private final static String KEY_TITLE = "key_title";
     private final static String KEY_MSG = "key_msg";
-    private final static String KEY_ACTIVITY = "key_activity";
 
     private View.OnClickListener mListener;
-    private AbstractBasicActivity mActivity;
 
     /**
      * Ctor
@@ -30,7 +28,7 @@ public class ExceptionDialog extends DialogFragment implements
      * @param title
      * @param msg
      */
-    private ExceptionDialog() {
+    public ExceptionDialog() {
     }
 
     /**
@@ -48,7 +46,6 @@ public class ExceptionDialog extends DialogFragment implements
             AbstractBasicActivity activityToFinish, String title, String message) {
         ExceptionDialog f = new ExceptionDialog();
         Bundle args = new Bundle();
-        args.putSerializable(KEY_ACTIVITY, activityToFinish);
         args.putString(KEY_TITLE, title);
         args.putString(KEY_MSG, message);
         f.setArguments(args);
@@ -59,7 +56,6 @@ public class ExceptionDialog extends DialogFragment implements
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         String title = getArguments().getString(KEY_TITLE);
         String msg = getArguments().getString(KEY_MSG);
-        mActivity = (AbstractBasicActivity) getArguments().getSerializable(KEY_ACTIVITY);
 
         AlertDialog.Builder b = new AlertDialog.Builder(getActivity());
         if (title != null && title.length() > 0) {
@@ -81,8 +77,8 @@ public class ExceptionDialog extends DialogFragment implements
         if (mListener != null) {
             mListener.onClick(null);
         } else {
-            if (mActivity != null)
-                mActivity.finish();
+            if (getActivity() != null)
+            	getActivity().finish();
             getDialog().dismiss();
         }
     }

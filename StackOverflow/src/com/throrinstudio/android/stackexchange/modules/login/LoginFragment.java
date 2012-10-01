@@ -55,5 +55,4 @@ public class LoginFragment extends AbstractStackBasicFragment{
 	public void loadInfos(){
 		
 	}
-	
 }

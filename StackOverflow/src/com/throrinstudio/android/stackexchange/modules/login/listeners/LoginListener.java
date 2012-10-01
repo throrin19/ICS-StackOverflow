@@ -1,12 +1,8 @@
 package com.throrinstudio.android.stackexchange.modules.login.listeners;
 
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
-
 import com.throrinstudio.android.common.utils.LogManager;
 import com.throrinstudio.android.stackexchange.libs.social.stackexchange.StackExchangeApp.AuthorizeListener;
 import com.throrinstudio.android.stackexchange.modules.login.LoginFragment;
-import com.throrinstudio.android.stackexchange.providers.LoginProvider;
 
 import de.neofonie.mobile.app.android.widget.crouton.Crouton;
 import de.neofonie.mobile.app.android.widget.crouton.Style;

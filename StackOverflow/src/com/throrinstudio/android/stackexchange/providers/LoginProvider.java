@@ -44,4 +44,12 @@ public class LoginProvider extends BasicProvider{
 	 	stackApp.setScopes(StackExchangeApp.SCOPE_NO_EXPIRY+","+StackExchangeApp.SCOPE_WRITE_ACCESS);
 	 	stackApp.authorize(listener);
 	}
+	
+	public boolean hasAccessToken(Context ctx){
+		return getAccountPreferences(ctx).getString(KEY_ACCOUNT_TOKEN, "").length() > 0;
+	}
+	
+	public boolean hasAccountInfos(Context ctx){
+		return getAccountPreferences(ctx).getString(KEY_ACCOUNT_LOGIN, "").length() > 0;
+	}
 }

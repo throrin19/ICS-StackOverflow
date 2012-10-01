@@ -16,6 +16,14 @@ public class LoginFragment extends AbstractStackBasicFragment{
 	private ListView 		mListAccounts;
 	private View			mEmptyView;
 	
+	public LoginFragment(){
+		super();
+	}
+	
+	public static LoginFragment newInstance(){
+		return new LoginFragment();
+	}
+	
 	@Override
 	public int getFragmentLayoutResource() {
 		return R.layout.module_login;
@@ -32,7 +40,7 @@ public class LoginFragment extends AbstractStackBasicFragment{
 			
 			@Override
 			public void onClick(View v) {
-				((LoginProvider)mModel.getProvider()).login(getActivity());
+				((LoginProvider)mModel.getProvider()).login(LoginFragment.this);
 			}
 		});
 	}
@@ -42,6 +50,10 @@ public class LoginFragment extends AbstractStackBasicFragment{
 		mAddButton 		= (Button) v.findViewById(R.id.register);
 		mListAccounts 	= (ListView) v.findViewById(R.id.accounts_list);
 		mEmptyView		= v.findViewById(R.id.accounts_empty);
+	}
+	
+	public void loadInfos(){
+		
 	}
 	
 }

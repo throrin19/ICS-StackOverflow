@@ -1,7 +1,5 @@
 package com.throrinstudio.android.stackexchange.libs.social.stackexchange;
 
-import java.io.Serializable;
-
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -45,39 +43,35 @@ public class StackExchangeDialog extends DialogFragment{
     private WebView 			mWebView;
     private LinearLayout 		mContent;
     private TextView 			mTitle;
-    
     private String				mCallback;
 
-    private static final String TAG = "StackOverflow-WebView";
-    
-    private static final String KEY_URL			= "key_url";
-    private static final String KEY_LISTENER	= "key_listener";
+    private static final String TAG 	= "StackOverflow-WebView";
+    private static final String KEY_URL	= "key_url";
     
     
     public StackExchangeDialog() {
     	mCallback = DEFAULT_CALLBACK;
     };
     
-    public static StackExchangeDialog newInstance(String url, SeDialogListener l){
+    public static StackExchangeDialog newInstance(String url){
     	StackExchangeDialog d = new StackExchangeDialog();
     	Bundle args = new Bundle();
     	args.putString(KEY_URL, url);
-    	args.putSerializable(KEY_LISTENER, l);
     	d.setArguments(args);
     	
     	return d;
     }
     
+    public void setListener(SeDialogListener l){
+    	mListener = l;
+    }
+    
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
     	
-    	Dialog d = new Dialog(getActivity());
-    	
-    	
+    	Dialog d 	= new Dialog(getActivity());
 		mUrl 		= getArguments().getString(KEY_URL);
-		mListener	= (SeDialogListener) getArguments().getSerializable(KEY_LISTENER);
-		
-		mSpinner = new ProgressDialog(getActivity());
+		mSpinner 	= new ProgressDialog(getActivity());
         
         mSpinner.requestWindowFeature(Window.FEATURE_NO_TITLE);
         mSpinner.setMessage(getActivity().getString(R.string.global_loading)+"...");
@@ -223,9 +217,8 @@ public class StackExchangeDialog extends DialogFragment{
     }
     
     
-    public interface SeDialogListener extends Serializable {
+    public interface SeDialogListener {
 		public void onComplete(String value);
-	
 		public void onError(String value);
 	}
 }

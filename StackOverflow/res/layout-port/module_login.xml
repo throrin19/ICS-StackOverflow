@@ -4,33 +4,86 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical" >
-    <Button
-        android:id="@+id/register"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:drawableRight="@drawable/ic_user_add"
-        android:text="@string/login_connect" />
-    
     <LinearLayout
-	   	android:layout_width="fill_parent"
-	   	android:layout_height="fill_parent"
-	   	android:gravity="center|top"
-	   	android:orientation="vertical" >
+            android:id="@+id/siteList"
+	        android:layout_width="fill_parent"
+	        android:layout_height="fill_parent"
+	        android:orientation="vertical" 
+	        android:visibility="visible">
+	        
+	        <Button
+	            android:id="@+id/register"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_margin="10dp"
+	            android:drawableRight="@drawable/ic_user_add"
+	            android:text="@string/login_connect" />
 	
-	   	<ListView
-		    android:id="@+id/accounts_list"
-		    android:layout_width="match_parent"
-		    android:layout_height="wrap_content"
-		    android:visibility="gone" >
-	   	</ListView>
-	     
-		<include 
-		    android:id="@+id/accounts_empty"
-		    android:layout_width="match_parent"
-		    android:layout_height="wrap_content"
-		    layout="@layout/module_login_empty"/>
-	 </LinearLayout>
+	        <LinearLayout
+			    android:id="@+id/account_infos"
+				android:layout_width="fill_parent"
+				android:layout_height="45dp"
+				android:layout_marginBottom="10dp"
+				android:orientation="horizontal" 
+				android:background="@color/details_gray"
+				android:visibility="gone">
+			    <ImageView
+			        android:id="@+id/account_picture"
+			        android:layout_marginRight="5dp"
+			        android:layout_width="45dp"
+			        android:layout_height="45dp" />
+			    <LinearLayout
+			        android:id="@+id/siteList"
+					android:layout_width="fill_parent"
+					android:layout_height="45dp"
+					android:orientation="vertical" >
+			        <TextView
+			            android:id="@+id/account_login"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:textAppearance="?android:attr/textAppearanceMedium" />
+			        <TextView
+			            android:id="@+id/account_email"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:textAppearance="?android:attr/textAppearanceSmall" />		  
+			    </LinearLayout>
+			</LinearLayout>
+	        
+	        <include 
+                android:id="@+id/accounts_empty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                layout="@layout/module_login_empty"/>
+	        
+	        <ListView
+	            android:id="@+id/accounts_list"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:visibility="gone" />
+		</LinearLayout>
+        <LinearLayout
+            android:id="@+id/loading"
+	        android:layout_width="fill_parent"
+	        android:layout_height="fill_parent"
+	        android:orientation="vertical"
+	        android:gravity="center_vertical|center_horizontal"
+	        android:visibility="gone" >
+
+            <ProgressBar
+                android:id="@+id/progressBar1"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/login_loading"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+	        
+	    </LinearLayout>
     
     
 </LinearLayout>

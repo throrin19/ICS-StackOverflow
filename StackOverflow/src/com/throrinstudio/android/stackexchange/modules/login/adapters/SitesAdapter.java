@@ -50,11 +50,12 @@ public class SitesAdapter extends BaseAdapter{
 		View vi = convertView;
         ViewHolder holder;
         if (convertView == null) {
-        	vi = mInflater.inflate(R.layout.list_item_img_text, null);
+        	vi = mInflater.inflate(R.layout.list_item_img_title_desc, null);
         	
         	holder = new ViewHolder();
         	holder.icon = (ImageView) vi.findViewById(R.id.list_icon);
-        	holder.text = (TextView) vi.findViewById(R.id.list_text);
+        	holder.text = (TextView) vi.findViewById(R.id.list_title);
+        	holder.desc = (TextView) vi.findViewById(R.id.list_desc);
         	
         	vi.setTag(holder);
         }else{
@@ -62,8 +63,8 @@ public class SitesAdapter extends BaseAdapter{
         }
         
         Site site = getItem(position);
-		
         holder.text.setText(site.getName());
+        holder.desc.setText(site.getAudience());
         
         if(site.getIconUrl() != null && site.getIconUrl().length() > 0){
         	holder.icon.setTag(site.getIconUrl());
@@ -81,5 +82,6 @@ public class SitesAdapter extends BaseAdapter{
 	private class ViewHolder{
 		public ImageView icon;
 		public TextView text;
+		public TextView desc;
 	}
 }

@@ -37,21 +37,8 @@ public class MapperFacade<A extends AbstractEntity> {
 	}
 	
 	public static enum MapperType{
-		site
+		site, user
 	};
-	
-	
-	public A map(InputStream stream, MapperType type)
-	{
-		init();
-		
-		A entity 					= null;
-		AbstractMapper<A> 	mapper	= null;
-		
-		return entity;
-	}
-	
-
 
 	@SuppressWarnings("unchecked")
 	public List<A> mapList(InputStream stream, MapperType type)

@@ -1,5 +1,8 @@
 package com.throrinstudio.android.stackexchange.modules.login;
 
+import java.io.IOException;
+import java.util.List;
+
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -7,14 +10,21 @@ import android.widget.ListView;
 
 import com.throrinstudio.android.common.modules.basic.AbstractBasicModel;
 import com.throrinstudio.android.stackexchange.R;
+import com.throrinstudio.android.stackexchange.libs.social.stackexchange.StackExchangeApi.RequestListener;
+import com.throrinstudio.android.stackexchange.libs.social.stackexchange.StackExchangeError;
+import com.throrinstudio.android.stackexchange.libs.social.stackexchange.entities.Site;
 import com.throrinstudio.android.stackexchange.modules.basic.AbstractStackBasicFragment;
+import com.throrinstudio.android.stackexchange.modules.login.adapters.SitesAdapter;
 import com.throrinstudio.android.stackexchange.providers.LoginProvider;
+
+import de.neofonie.mobile.app.android.widget.crouton.Crouton;
+import de.neofonie.mobile.app.android.widget.crouton.Style;
 
 public class LoginFragment extends AbstractStackBasicFragment{
 
 	private Button  		mAddButton;
-	private ListView 		mListAccounts;
-	private View			mEmptyView;
+	private ListView 		mListView;
+	
 	
 	public LoginFragment(){
 		super();
@@ -48,11 +58,36 @@ public class LoginFragment extends AbstractStackBasicFragment{
 	@Override
 	protected void bindViews(View v) {
 		mAddButton 		= (Button) v.findViewById(R.id.register);
-		mListAccounts 	= (ListView) v.findViewById(R.id.accounts_list);
-		mEmptyView		= v.findViewById(R.id.accounts_empty);
-	}
-	
-	public void loadInfos(){
+		mListView 		= (ListView) v.findViewById(R.id.sites_list);
 		
 	}
+	
+	public void loadSites(){
+		RequestListener listener = new RequestListener() {
+			@Override
+			public void onIOException(IOException e, Object state) {
+				Crouton.makeText(getActivity(), e.getMessage(), Style.ALERT);
+			}
+			
+			@Override
+			public void onError(StackExchangeError e, Object state) {
+				Crouton.makeText(getActivity(), e.getMessage(), Style.ALERT);
+			}
+			
+			@Override
+			public void onComplete(Object state) {
+				SitesAdapter adapter = new SitesAdapter(getActivity(), (List<Site>) state);
+				mListView.setAdapter(adapter);
+			}
+		};
+		((LoginProvider)mModel.getProvider()).showSites(getActivity().getApplicationContext(), listener);
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		
+		loadSites();
+	}
+	
 }

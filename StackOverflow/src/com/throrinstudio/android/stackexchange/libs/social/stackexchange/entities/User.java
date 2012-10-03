@@ -8,328 +8,229 @@ public class User extends AbstractEntity{
 		unregistered, registered, moderator, does_not_exist
 	};
 	
-	private int accountId;
-	private int userId;
+	public static class BadgeCount{
+		private int bronze;
+		private int gold;
+		private int silver;
+		
+		public int getBronze() {
+			return bronze;
+		}
+		public void setBronze(int bronze) {
+			this.bronze = bronze;
+		}
+		public int getGold() {
+			return gold;
+		}
+		public void setGold(int gold) {
+			this.gold = gold;
+		}
+		public int getSilver() {
+			return silver;
+		}
+		public void setSilver(int silver) {
+			this.silver = silver;
+		}
+	}
 	
-	private int badgeBronze;
-	private int badgeGold;
-	private int badgeSilver;
-	
-	private Date creationDate;
-	private Date lastAccessDate;
-	private Date lastModifiedDate;
-	
-	private int questionCount;
-	private int answerCount;
-	
-	private int reputation;
-	private int reputationChangeDay;
-	private int reputationChangeWeek;
-	private int reputationChangeMonth;
-	private int reputationChangeQuarter;
-	private int reputationChangeYear;
-	
-	private String siteUrl;
-	private String profileUrl;
-	
-	private UserType userType;
-
-	private String location;
+	private String about_me;
+	private int accept_rate;
+	private int account_id;
 	private int age;
-	private String profileImage;
-	private boolean isEmployee;
-	private String name;
+	private int answer_count;
+	private BadgeCount badge_count;
+	private Date creation_date;
+	private String display_name;
+	private int down_vote_count;
+	private boolean is_employee;
+	private Date last_access_date;
+	private Date last_modified_date;
+	private String link;
+	private String location;
+	private String profile_image;
+	private int question_count;
+	private int reputation;
+	private int reputation_change_day;
+	private int reputation_change_month;
+	private int reputation_change_quarter;
+	private int reputation_change_week;
+	private int reputation_change_year;
+	private Date timed_penalty_date;
+	private int up_vote_count;
+	private int user_id;
+	private UserType user_type;
+	private int view_count;
+	private String website_url;
 	
 	
-	
-	
-	/**
-	 * @return the accountId
-	 */
-	public int getAccountId() {
-		return accountId;
+	public String getAbout_me() {
+		return about_me;
 	}
-	/**
-	 * @param accountId the accountId to set
-	 */
-	public void setAccountId(int accountId) {
-		this.accountId = accountId;
+	public void setAbout_me(String about_me) {
+		this.about_me = about_me;
 	}
-	/**
-	 * @return the userId
-	 */
-	public int getUserId() {
-		return userId;
+	public int getAccept_rate() {
+		return accept_rate;
 	}
-	/**
-	 * @param userId the userId to set
-	 */
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setAccept_rate(int accept_rate) {
+		this.accept_rate = accept_rate;
 	}
-	/**
-	 * @return the badgeBronze
-	 */
-	public int getBadgeBronze() {
-		return badgeBronze;
+	public int getAccount_id() {
+		return account_id;
 	}
-	/**
-	 * @param badgeBronze the badgeBronze to set
-	 */
-	public void setBadgeBronze(int badgeBronze) {
-		this.badgeBronze = badgeBronze;
+	public void setAccount_id(int account_id) {
+		this.account_id = account_id;
 	}
-	/**
-	 * @return the badgeGold
-	 */
-	public int getBadgeGold() {
-		return badgeGold;
-	}
-	/**
-	 * @param badgeGold the badgeGold to set
-	 */
-	public void setBadgeGold(int badgeGold) {
-		this.badgeGold = badgeGold;
-	}
-	/**
-	 * @return the badgeSilver
-	 */
-	public int getBadgeSilver() {
-		return badgeSilver;
-	}
-	/**
-	 * @param badgeSilver the badgeSilver to set
-	 */
-	public void setBadgeSilver(int badgeSilver) {
-		this.badgeSilver = badgeSilver;
-	}
-	/**
-	 * @return the creationDate
-	 */
-	public Date getCreationDate() {
-		return creationDate;
-	}
-	/**
-	 * @param creationDate the creationDate to set
-	 */
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
-	}
-	/**
-	 * @return the lastAccessDate
-	 */
-	public Date getLastAccessDate() {
-		return lastAccessDate;
-	}
-	/**
-	 * @param lastAccessDate the lastAccessDate to set
-	 */
-	public void setLastAccessDate(Date lastAccessDate) {
-		this.lastAccessDate = lastAccessDate;
-	}
-	/**
-	 * @return the lastModifiedDate
-	 */
-	public Date getLastModifiedDate() {
-		return lastModifiedDate;
-	}
-	/**
-	 * @param lastModifiedDate the lastModifiedDate to set
-	 */
-	public void setLastModifiedDate(Date lastModifiedDate) {
-		this.lastModifiedDate = lastModifiedDate;
-	}
-	/**
-	 * @return the questionCount
-	 */
-	public int getQuestionCount() {
-		return questionCount;
-	}
-	/**
-	 * @param questionCount the questionCount to set
-	 */
-	public void setQuestionCount(int questionCount) {
-		this.questionCount = questionCount;
-	}
-	/**
-	 * @return the answerCount
-	 */
-	public int getAnswerCount() {
-		return answerCount;
-	}
-	/**
-	 * @param answerCount the answerCount to set
-	 */
-	public void setAnswerCount(int answerCount) {
-		this.answerCount = answerCount;
-	}
-	/**
-	 * @return the reputation
-	 */
-	public int getReputation() {
-		return reputation;
-	}
-	/**
-	 * @param reputation the reputation to set
-	 */
-	public void setReputation(int reputation) {
-		this.reputation = reputation;
-	}
-	/**
-	 * @return the reputationChangeDay
-	 */
-	public int getReputationChangeDay() {
-		return reputationChangeDay;
-	}
-	/**
-	 * @param reputationChangeDay the reputationChangeDay to set
-	 */
-	public void setReputationChangeDay(int reputationChangeDay) {
-		this.reputationChangeDay = reputationChangeDay;
-	}
-	/**
-	 * @return the reputationChangeWeek
-	 */
-	public int getReputationChangeWeek() {
-		return reputationChangeWeek;
-	}
-	/**
-	 * @param reputationChangeWeek the reputationChangeWeek to set
-	 */
-	public void setReputationChangeWeek(int reputationChangeWeek) {
-		this.reputationChangeWeek = reputationChangeWeek;
-	}
-	/**
-	 * @return the reputationChangeMonth
-	 */
-	public int getReputationChangeMonth() {
-		return reputationChangeMonth;
-	}
-	/**
-	 * @param reputationChangeMonth the reputationChangeMonth to set
-	 */
-	public void setReputationChangeMonth(int reputationChangeMonth) {
-		this.reputationChangeMonth = reputationChangeMonth;
-	}
-	/**
-	 * @return the reputationChangeQuarter
-	 */
-	public int getReputationChangeQuarter() {
-		return reputationChangeQuarter;
-	}
-	/**
-	 * @param reputationChangeQuarter the reputationChangeQuarter to set
-	 */
-	public void setReputationChangeQuarter(int reputationChangeQuarter) {
-		this.reputationChangeQuarter = reputationChangeQuarter;
-	}
-	/**
-	 * @return the reputationChangeYear
-	 */
-	public int getReputationChangeYear() {
-		return reputationChangeYear;
-	}
-	/**
-	 * @param reputationChangeYear the reputationChangeYear to set
-	 */
-	public void setReputationChangeYear(int reputationChangeYear) {
-		this.reputationChangeYear = reputationChangeYear;
-	}
-	/**
-	 * @return the siteUrl
-	 */
-	public String getSiteUrl() {
-		return siteUrl;
-	}
-	/**
-	 * @param siteUrl the siteUrl to set
-	 */
-	public void setSiteUrl(String siteUrl) {
-		this.siteUrl = siteUrl;
-	}
-	/**
-	 * @return the profileUrl
-	 */
-	public String getProfileUrl() {
-		return profileUrl;
-	}
-	/**
-	 * @param profileUrl the profileUrl to set
-	 */
-	public void setProfileUrl(String profileUrl) {
-		this.profileUrl = profileUrl;
-	}
-	/**
-	 * @return the userType
-	 */
-	public UserType getUserType() {
-		return userType;
-	}
-	/**
-	 * @param userType the userType to set
-	 */
-	public void setUserType(UserType userType) {
-		this.userType = userType;
-	}
-	/**
-	 * @return the location
-	 */
-	public String getLocation() {
-		return location;
-	}
-	/**
-	 * @param location the location to set
-	 */
-	public void setLocation(String location) {
-		this.location = location;
-	}
-	/**
-	 * @return the age
-	 */
 	public int getAge() {
 		return age;
 	}
-	/**
-	 * @param age the age to set
-	 */
 	public void setAge(int age) {
 		this.age = age;
 	}
-	/**
-	 * @return the profileImage
-	 */
-	public String getProfileImage() {
-		return profileImage;
+	public int getAnswer_count() {
+		return answer_count;
 	}
-	/**
-	 * @param profileImage the profileImage to set
-	 */
-	public void setProfileImage(String profileImage) {
-		this.profileImage = profileImage;
+	public void setAnswer_count(int answer_count) {
+		this.answer_count = answer_count;
 	}
-	/**
-	 * @return the isEmployee
-	 */
-	public boolean isEmployee() {
-		return isEmployee;
+	public BadgeCount getBadge_count() {
+		return badge_count;
 	}
-	/**
-	 * @param isEmployee the isEmployee to set
-	 */
-	public void setEmployee(boolean isEmployee) {
-		this.isEmployee = isEmployee;
+	public void setBadge_count(BadgeCount badge_count) {
+		this.badge_count = badge_count;
 	}
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
+	public Date getCreation_date() {
+		return creation_date;
 	}
-	/**
-	 * @param name the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
+	public void setCreation_date(Date creation_date) {
+		this.creation_date = creation_date;
 	}
+	public String getDisplay_name() {
+		return display_name;
+	}
+	public void setDisplay_name(String display_name) {
+		this.display_name = display_name;
+	}
+	public int getDown_vote_count() {
+		return down_vote_count;
+	}
+	public void setDown_vote_count(int down_vote_count) {
+		this.down_vote_count = down_vote_count;
+	}
+	public boolean isIs_employee() {
+		return is_employee;
+	}
+	public void setIs_employee(boolean is_employee) {
+		this.is_employee = is_employee;
+	}
+	public Date getLast_access_date() {
+		return last_access_date;
+	}
+	public void setLast_access_date(Date last_access_date) {
+		this.last_access_date = last_access_date;
+	}
+	public Date getLast_modified_date() {
+		return last_modified_date;
+	}
+	public void setLast_modified_date(Date last_modified_date) {
+		this.last_modified_date = last_modified_date;
+	}
+	public String getLink() {
+		return link;
+	}
+	public void setLink(String link) {
+		this.link = link;
+	}
+	public String getLocation() {
+		return location;
+	}
+	public void setLocation(String location) {
+		this.location = location;
+	}
+	public String getProfile_image() {
+		return profile_image;
+	}
+	public void setProfile_image(String profile_image) {
+		this.profile_image = profile_image;
+	}
+	public int getQuestion_count() {
+		return question_count;
+	}
+	public void setQuestion_count(int question_count) {
+		this.question_count = question_count;
+	}
+	public int getReputation() {
+		return reputation;
+	}
+	public void setReputation(int reputation) {
+		this.reputation = reputation;
+	}
+	public int getReputation_change_day() {
+		return reputation_change_day;
+	}
+	public void setReputation_change_day(int reputation_change_day) {
+		this.reputation_change_day = reputation_change_day;
+	}
+	public int getReputation_change_month() {
+		return reputation_change_month;
+	}
+	public void setReputation_change_month(int reputation_change_month) {
+		this.reputation_change_month = reputation_change_month;
+	}
+	public int getReputation_change_quarter() {
+		return reputation_change_quarter;
+	}
+	public void setReputation_change_quarter(int reputation_change_quarter) {
+		this.reputation_change_quarter = reputation_change_quarter;
+	}
+	public int getReputation_change_week() {
+		return reputation_change_week;
+	}
+	public void setReputation_change_week(int reputation_change_week) {
+		this.reputation_change_week = reputation_change_week;
+	}
+	public int getReputation_change_year() {
+		return reputation_change_year;
+	}
+	public void setReputation_change_year(int reputation_change_year) {
+		this.reputation_change_year = reputation_change_year;
+	}
+	public Date getTimed_penalty_date() {
+		return timed_penalty_date;
+	}
+	public void setTimed_penalty_date(Date timed_penalty_date) {
+		this.timed_penalty_date = timed_penalty_date;
+	}
+	public int getUp_vote_count() {
+		return up_vote_count;
+	}
+	public void setUp_vote_count(int up_vote_count) {
+		this.up_vote_count = up_vote_count;
+	}
+	public int getUser_id() {
+		return user_id;
+	}
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
+	}
+	public UserType getUser_type() {
+		return user_type;
+	}
+	public void setUser_type(UserType user_type) {
+		this.user_type = user_type;
+	}
+	public int getView_count() {
+		return view_count;
+	}
+	public void setView_count(int view_count) {
+		this.view_count = view_count;
+	}
+	public String getWebsite_url() {
+		return website_url;
+	}
+	public void setWebsite_url(String website_url) {
+		this.website_url = website_url;
+	}
+	
 	
 }

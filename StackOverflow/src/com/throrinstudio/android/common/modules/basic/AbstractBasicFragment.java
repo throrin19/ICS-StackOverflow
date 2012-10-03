@@ -2,6 +2,7 @@ package com.throrinstudio.android.common.modules.basic;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -154,4 +155,10 @@ public abstract class AbstractBasicFragment extends Fragment{
             }
         }
     }
+
+	
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		
+	}
 }

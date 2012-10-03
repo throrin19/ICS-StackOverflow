@@ -2,12 +2,17 @@ package com.throrinstudio.android.stackexchange.libs.social.stackexchange;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 
 import android.content.Context;
 import android.os.Handler;
 
 import com.throrinstudio.android.stackexchange.libs.social.stackexchange.entities.Site;
+import com.throrinstudio.android.stackexchange.libs.social.stackexchange.entities.User;
 import com.throrinstudio.android.stackexchange.libs.social.stackexchange.mappers.MapperFacade;
 import com.throrinstudio.android.stackexchange.libs.social.stackexchange.mappers.MapperFacade.MapperType;
 import com.throrinstudio.android.stackexchange.libs.social.stackexchange.requesters.StackExchangeRequester;
@@ -33,7 +38,7 @@ import com.throrinstudio.android.stackexchange.libs.social.stackexchange.request
  */
 public class StackExchangeApi {
 	
-	private static final String API_URL = "https://api.stackexchange.com/2.0/";
+	private static final String API_URL = "https://api.stackexchange.com/2.1/";
 	
 	private Handler mHandler = new Handler();
 	
@@ -65,7 +70,40 @@ public class StackExchangeApi {
 				
 			}		
 		}.start();
-		
+	}
+	
+	public void getUser(Context ctx, final String accesstoken, final RequestListener listener){
+		new Thread(){
+			@Override
+			public void run() {
+				super.run();
+				
+				StackExchangeRequester requester 	= new StackExchangeRequester();
+				MapperFacade<User> mapper 			= new MapperFacade<User>();
+				List<NameValuePair> params 			= new ArrayList<NameValuePair>();
+				
+				params.add(new BasicNameValuePair("access_token", accesstoken));
+				
+				InputStream stream 	= requester.request(API_URL+"/me", params);
+				List<User> users 	= mapper.mapList(stream, MapperType.user);
+				if(users.size() > 0){
+					final User user = users.get(0);
+					mHandler.post(new Runnable() {
+						@Override
+						public void run() {
+							listener.onComplete(user);
+						}
+					});
+				}else{
+					mHandler.post(new Runnable() {
+						@Override
+						public void run() {
+							listener.onError(new StackExchangeError("Impossible de récupérer l'utilisateur"), null);
+						}
+					});
+				}
+			}		
+		}.start();
 	}
 	
 	

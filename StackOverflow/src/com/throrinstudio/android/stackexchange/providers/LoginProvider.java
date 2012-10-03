@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.throrinstudio.android.common.providers.BasicProvider;
+import com.throrinstudio.android.stackexchange.libs.social.stackexchange.StackExchangeApi;
+import com.throrinstudio.android.stackexchange.libs.social.stackexchange.StackExchangeApi.RequestListener;
 import com.throrinstudio.android.stackexchange.libs.social.stackexchange.StackExchangeApp;
 import com.throrinstudio.android.stackexchange.libs.social.stackexchange.utils.StackExchangeApiUtils;
 import com.throrinstudio.android.stackexchange.modules.login.LoginFragment;
@@ -51,5 +53,10 @@ public class LoginProvider extends BasicProvider{
 	
 	public boolean hasAccountInfos(Context ctx){
 		return getAccountPreferences(ctx).getString(KEY_ACCOUNT_LOGIN, "").length() > 0;
+	}
+	
+	public void showSites(Context ctx, RequestListener listener){
+		StackExchangeApi api = new StackExchangeApi();
+		api.getSitesList(ctx, listener);
 	}
 }

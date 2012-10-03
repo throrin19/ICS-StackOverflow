@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+       android:layout_width="fill_parent"
+       android:layout_height="fill_parent"
+       android:orientation="vertical">
+       
+       <Button
+           android:id="@+id/register"
+           android:layout_width="fill_parent"
+           android:layout_height="wrap_content"
+           android:layout_margin="10dp"
+           android:drawableRight="@drawable/ic_user_add"
+           android:text="@string/login_connect"
+           android:visibility="visible" />
+
+	<LinearLayout
+	    android:id="@+id/account_infos"
+		android:layout_width="fill_parent"
+		android:layout_height="45dp"
+		android:layout_marginBottom="10dp"
+		android:orientation="horizontal" 
+		android:background="@color/details_gray"
+		android:visibility="gone">
+	    <ImageView
+	        android:id="@+id/account_picture"
+	        android:layout_marginRight="5dp"
+	        android:layout_width="45dp"
+	        android:layout_height="45dp" />
+	    <LinearLayout
+	        android:id="@+id/siteList"
+			android:layout_width="fill_parent"
+			android:layout_height="45dp"
+			android:orientation="vertical" >
+	        <TextView
+	            android:id="@+id/account_login"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:textAppearance="?android:attr/textAppearanceMedium" />
+	        <TextView
+	            android:id="@+id/account_email"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:textAppearance="?android:attr/textAppearanceSmall" />		  
+	    </LinearLayout>
+	</LinearLayout>
+       
+       <ListView
+           android:id="@+id/sites_list"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent" />
+</LinearLayout>

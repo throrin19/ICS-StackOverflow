@@ -130,9 +130,6 @@ public class StackExchangeDialog extends DialogFragment{
     @SuppressLint("SetJavaScriptEnabled")
 	private void setUpWebView() {
         mWebView = new WebView(getActivity());
-        android.webkit.CookieManager.getInstance().removeAllCookie();
-        android.webkit.CookieManager.getInstance().removeSessionCookie();
-        
         
         mWebView.clearHistory();
 		mWebView.clearFormData();

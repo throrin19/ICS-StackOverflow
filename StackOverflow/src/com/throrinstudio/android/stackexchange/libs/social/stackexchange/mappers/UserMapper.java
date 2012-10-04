@@ -43,6 +43,8 @@ public class UserMapper extends AbstractMapper<User>{
 				}
 			}
 		}
+//		JsonNode node = mObjectMapper.readTree(jp);
+//		System.out.println(node.toString());
 		
 		return users;
 	}

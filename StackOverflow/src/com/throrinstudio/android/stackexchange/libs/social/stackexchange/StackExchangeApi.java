@@ -16,6 +16,7 @@ import com.throrinstudio.android.stackexchange.libs.social.stackexchange.entitie
 import com.throrinstudio.android.stackexchange.libs.social.stackexchange.mappers.MapperFacade;
 import com.throrinstudio.android.stackexchange.libs.social.stackexchange.mappers.MapperFacade.MapperType;
 import com.throrinstudio.android.stackexchange.libs.social.stackexchange.requesters.StackExchangeRequester;
+import com.throrinstudio.android.stackexchange.libs.social.stackexchange.utils.StackExchangeApiUtils;
 
 /**
  * A sample implementation of asynchronous API requests. This class provides
@@ -72,7 +73,7 @@ public class StackExchangeApi {
 		}.start();
 	}
 	
-	public void getUser(Context ctx, final String accesstoken, final RequestListener listener){
+	public void getUser(Context ctx, final String accesstoken, final String site, final RequestListener listener){
 		new Thread(){
 			@Override
 			public void run() {
@@ -83,6 +84,8 @@ public class StackExchangeApi {
 				List<NameValuePair> params 			= new ArrayList<NameValuePair>();
 				
 				params.add(new BasicNameValuePair("access_token", accesstoken));
+				params.add(new BasicNameValuePair("site", site));
+				params.add(new BasicNameValuePair("key", StackExchangeApiUtils.getKey()));
 				
 				InputStream stream 	= requester.request(API_URL+"/me", params);
 				List<User> users 	= mapper.mapList(stream, MapperType.user);

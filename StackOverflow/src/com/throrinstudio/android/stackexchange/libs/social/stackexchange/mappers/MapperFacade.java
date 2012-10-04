@@ -53,6 +53,8 @@ public class MapperFacade<A extends AbstractEntity> {
 			
 			if(type == MapperType.site){
 				mapper = new SiteMapper(mObjectMapper);
+			}else if(type == MapperType.user){
+				mapper = new UserMapper(mObjectMapper);
 			}
 			
 			if(mapper != null){
